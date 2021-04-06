@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Products</h1>
+    <h1>{{ message }}</h1>
+    <div>
+        <ul>
+            {% for obj in form %}
+            <li> Product <a href= {{obj.id}}>{{ obj.title }}</a></li>
+            <br/>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

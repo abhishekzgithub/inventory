@@ -12,7 +12,6 @@ def login_page(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get("email")
-            #phone_number = form.cleaned_data.get("phone_number")
             password = form.cleaned_data.get("password")
             return redirect("home")
     return render(request, "account/login.html", context)
