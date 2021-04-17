@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1>Cart</h1>
+    <h1>{{ message }}</h1>
+    <div class="container">
+        <ul class="col">
+            {% for cart in form %}
+                <li class="col-sm">User : {{ cart.user }}</li>
+                <li class="col-sm">Cart Id : {{ cart }}</li>
+                <ul>
+                    {% for prod in cart.product.all %}
+                        <li class="col-sm">Item: {{ prod.title }}</li>
+                        <li class="col-sm">Price: {{ prod.price }}</li>
+                        <br/>
+                    {% endfor %}
+                </ul>
+                <li class="col-sm">Sub Total : {{ cart.subtotal }}</li>
+                <li class="col-sm">Total : {{ cart.total }}</li>
+                <button class="col-sm">Buy</button>
+                <br/>
+                <br/>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

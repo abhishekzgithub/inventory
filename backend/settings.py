@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'product',
     'cart',
     'order',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -124,6 +125,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn", "static_root") # this involves the compiled version of the js,img,css
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn", "static_root") # this involves the compiled version of the js,img,css, when we run python manage.py collectstatic
 
 AUTH_USER_MODEL = 'account.User'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -1,0 +1,16 @@
+ul#horizontal-list {
+	list-style: none;
+    padding-top: 40%;
+    display: inline-flex;
+    padding-left: 33%;
+}
+ul#horizontal-list li {
+    min-width: 86px;
+   
+}
+
+ul#horizontal-list a{
+    color: blue;
+
+}
+    
