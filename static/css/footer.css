@@ -1,4 +1,4 @@
-ul#horizontal-list {
+/* ul#horizontal-list {
 	list-style: none;
     padding-top: 40%;
     display: inline-flex;
@@ -13,4 +13,7 @@ ul#horizontal-list a{
     color: blue;
 
 }
-    
+     */
+.cls-footer{
+
+}

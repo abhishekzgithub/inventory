@@ -1,0 +1,23 @@
+.cls-navigator header nav div a{
+    color:black;
+}
+
+.cls-navigator header nav div {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.cls-navigator header nav div div {
+}
+.cls-navigator header nav div div ul{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.cls-navigator header nav div div ul > li{
+    list-style-type: none;
+    padding-inline: 10px;
+}
