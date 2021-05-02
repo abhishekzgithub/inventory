@@ -6,6 +6,8 @@
     flex-wrap: wrap;
     position: relative;
     margin-top: 3%;
+    box-sizing: border-box;
+    border: 1px solid #000;
 }
 .cls-cards-base >p{
     text-align: center;
@@ -33,4 +35,9 @@
     position: relative;
     margin-top: 40%;
     text-align: center;
+}
+.cls-cards-header>h1{
+    font-size: 55px;
+    line-height: 1.2;
+    font-weight: 700;
 }

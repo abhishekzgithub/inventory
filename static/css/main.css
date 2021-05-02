@@ -1,8 +1,8 @@
 .cls-main{
     height: 700px;
     /* display: flex;
-    flex-direction: row;
-    align-items: flex-end; */
+    flex-direction: column; */
+    /* align-items: flex-end; */
 }
 .cls-main section ul{
     list-style: none;

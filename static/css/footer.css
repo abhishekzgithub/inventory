@@ -1,6 +1,16 @@
+.cls-footer{
+    box-sizing: border-box;
+    border: 10px solid #000;
+    position: relative;
+    margin-top: 45%;
+    padding-bottom: 5%;
+    padding-top: 2%;
+}
+
 .cls-footer div{
  display: flex;
  justify-content: space-around;
+ 
 }
 
 .cls-footer div section ul li{
@@ -23,8 +33,4 @@
 .cls-footer .cls-action .cls-sns ul > li{
     padding-inline: 2px;
     
-}
-.cls-footer{
-position: relative;
-margin-top: 27%;
 }
