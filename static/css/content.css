@@ -4,7 +4,7 @@ top: 33%;
 left: 18%;
 right: 22%;
 box-sizing: border-box;
-border: 1px solid gray;
+/* border: 1px solid gray; */
 }
 
 .cls-content .cls-img img{
@@ -15,18 +15,18 @@ border: 1px solid gray;
 .cls-content>section{
     display: flex;
     box-sizing: border-box;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
 }
 .cls-content>section section{
     /* display: flex;
     align-items: flex-start; */
     /* flex: 1; */
     box-sizing: border-box;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
 }
 .cls-data{
     margin-right: 6%;
-    text-align: center;
+    text-align: justify;
     margin-left: 2%;
     margin-top: 2%;
 }

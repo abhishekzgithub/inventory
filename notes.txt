@@ -2,3 +2,5 @@ python manage.py runserver
 python manage.py makemigrations && python manage.py migrate
 
 python manage.py createsuperuser
+
+https://www.w3docs.com/learn-css/the-ultimate-guide-to-flexbox.html#align-items
