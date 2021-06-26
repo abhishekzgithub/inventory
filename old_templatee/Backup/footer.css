@@ -1,7 +1,7 @@
-/* .cls-footer{
+.cls-footer{
     box-sizing: border-box;
-    border: 1px solid seagreen;
-    position: absolute;
+    border: 10px solid #000;
+    position: relative;
     margin-top: 150%;
     padding-bottom: 5%;
     padding-top: 6%;
@@ -33,23 +33,4 @@
 .cls-footer .cls-action .cls-sns ul > li{
     padding-inline: 2px;
     
-} */
-
-.d-block{
-    display: block;
-}
-.cls-footer-container{
-    box-sizing: border-box;
-border: 2px solid seagreen;
-position: relative;
-margin-top: 93%;
-/* width: 61%;
-margin-left: 17%; */
-height: 100%;
-display: flex;
-gap: 28px;
-text-align: center;
-}
-.cls-footer-container section{
-    flex:1;
 }

@@ -1,0 +1,32 @@
+.cls-navigator header nav div a{
+    color:black;
+    text-decoration: none;
+}
+
+.cls-navigator header nav div {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+
+.cls-navigator header nav div div {
+}
+.cls-navigator header nav div div ul{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.cls-navigator header nav div div ul > li{
+    list-style-type: none;
+    padding-inline: 10px;
+    /* padding: 6px 15px; */
+}
+
+.cls-navigator header nav div div ul li a:hover{
+    background:rgb(235, 241, 235);
+    color:black;
+}

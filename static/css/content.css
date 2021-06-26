@@ -1,0 +1,32 @@
+.cls-content{
+position: absolute;
+top: 33%;
+left: 18%;
+right: 22%;
+box-sizing: border-box;
+border: 1px solid gray;
+}
+
+.cls-content .cls-img img{
+    width: 233px;
+    border-radius: 26px 0;
+}
+
+.cls-content>section{
+    display: flex;
+    box-sizing: border-box;
+    border: 1px solid gray;
+}
+.cls-content>section section{
+    /* display: flex;
+    align-items: flex-start; */
+    /* flex: 1; */
+    box-sizing: border-box;
+    border: 1px solid gray;
+}
+.cls-data{
+    margin-right: 6%;
+    text-align: center;
+    margin-left: 2%;
+    margin-top: 2%;
+}
