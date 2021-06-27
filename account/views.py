@@ -14,7 +14,7 @@ def login_page(request):
             email = form.cleaned_data.get("email")
             password = form.cleaned_data.get("password")
             return redirect("home")
-    return render(request, "account/login.html", context)
+    return render(request, "login.html", context)
 
 def signup(request):
     context = {"message": "You have reached the Sign up page."}
@@ -28,12 +28,12 @@ def signup(request):
             user = authenticate(username=full_name, password=raw_password)
             login(request, user)
             return redirect("home")
-    return render(request,'account/signup.html',context)
+    return render(request,'signup.html',context)
 
 def home(request):
     context = {"message": "You have been reached the home page."}
-    return render(request, "base.html", context)
+    return render(request, "index.html", context)
 
 def logout_page(request):
     context = {"message": "You have been logged out."}
-    return render(request, "base.html", context)
+    return render(request, "index.html", context)

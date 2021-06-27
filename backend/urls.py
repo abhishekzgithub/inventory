@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,5 +26,7 @@ urlpatterns = [
     path('example/', TemplateView.as_view(template_name='example.html')),
     url("^product/",include(("product.urls","product"), namespace="product")),
     url("^cart/",include(("cart.urls","cart"), namespace="cart")),
-
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+

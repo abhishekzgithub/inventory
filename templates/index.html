@@ -4,25 +4,11 @@
         <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
-            <link rel="stylesheet" href="{% static 'css/base.css' %}">
-            <link rel="stylesheet" href="{% static 'css/logo.css' %}">
-            <link rel="stylesheet" href="{% static 'css/content.css' %}">
-            <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+            {% include "js.html" %}
         </head>
         <body>
-            <section>
-                {% include 'logo.html' %}
-            </section>
-            <section>
                 {% include 'navbar.html' %}
-            </section>
-            <section>
                 {% include 'content.html' %}
-            </section>
-            <section>
-                {% include 'footer.html' %}
-            </section>
         </body>
     </html>
 </html>
