@@ -18,6 +18,8 @@ from django.urls import path
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +30,6 @@ urlpatterns = [
     url("^cart/",include(("cart.urls","cart"), namespace="cart")),
 ]
 
-urlpatterns += staticfiles_urlpatterns()
+#urlpatterns += staticfiles_urlpatterns()
 
+#urlpatterns +=static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
