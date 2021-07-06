@@ -90,7 +90,8 @@ class User(AbstractBaseUser):
     @property
     def is_admin(self):
         return self.admin
-
+    class Meta:
+        db_table = "account_user"
     # @property
     # def is_active(self):
     #     return self.active

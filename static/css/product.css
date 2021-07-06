@@ -1,0 +1,27 @@
+.cls-product-container{
+    /* box-sizing: border-box; */
+}
+
+.cls-product-container .cls-product{
+    /* box-sizing: border-box; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+.cls-product-container .cls-product .cls-product-items{
+    /* box-sizing: border-box; */
+    list-style-type: none;
+    /* margin: auto; */
+    flex:1;
+    display: block;
+
+}
+
+.cls-product-container .cls-product .cls-product-items img{
+    width: 100%;
+}
+.cls-product-container .cls-product .cls-product-items input{
+/* display: block; */
+width: 15%;
+}

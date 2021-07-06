@@ -48,3 +48,5 @@ class Address(models.Model):
                 postal= self.postal_code,
                 country = self.country
             )
+    class Meta:
+        db_table = "address"

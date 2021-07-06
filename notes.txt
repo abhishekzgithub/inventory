@@ -1,8 +1,9 @@
 python manage.py runserver
 python manage.py makemigrations && python manage.py migrate
-
+manage.py migrate --run-syncdb
 python manage.py createsuperuser
 
 https://www.w3docs.com/learn-css/the-ultimate-guide-to-flexbox.html#align-items
 
 https://web.dev/one-line-layouts/
+https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child

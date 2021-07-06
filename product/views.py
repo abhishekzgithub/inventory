@@ -15,5 +15,6 @@ def product_view(request):
 
 def per_product_view(request,id):
     context={"form":""}
-    context["form"] = Product.objects.get_by_id(id)
+    if request.method=="GET":
+        context["form"] = Product.objects.get_by_id(id)
     return render(request, "product/product_details.html", context)

@@ -16,8 +16,8 @@ class Order(models.Model):
     status              = models.CharField(max_length=120, default='created', choices=ORDER_STATUS_CHOICES)
     timestamp           = models.DateTimeField(auto_now=True)
     updated             = models.DateTimeField(auto_now=True)
-    shipping_total      = models.DecimalField(default=25, max_digits=100, decimal_places=2)
-    total               = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    shipping_cost       = models.DecimalField(default=25, max_digits=100, decimal_places=2)
+    # total               = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
 
     class Meta:
         db_table = "order"
