@@ -19,7 +19,9 @@ class Address(models.Model):
     state           = models.CharField(max_length=120)
     country         = models.CharField(max_length=120, default='India')
     postal_code     = models.CharField(max_length=120)
-
+    created_timestamp = models.DateTimeField(auto_now=True)
+    updated_timestamp = models.DateTimeField(auto_now=True)
+    
     def __str__(self):
         if self.nickname:
             return str(self.nickname)

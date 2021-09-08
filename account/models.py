@@ -55,9 +55,9 @@ class User(AbstractBaseUser):
     timestamp   = models.DateTimeField(auto_now_add=True)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+919876543210'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validators should be a list
-    # confirm     = models.BooleanField(default=False)
-    # confirmed_date     = models.DateTimeField(default=False)
-
+    created_timestamp = models.DateTimeField(auto_now=True)
+    updated_timestamp = models.DateTimeField(auto_now=True)
+    
     USERNAME_FIELD = 'email' #username
     # USERNAME_FIELD and password are required by default
     REQUIRED_FIELDS = ["phone_number"] #['full_name'] #python manage.py createsuperuser

@@ -7,21 +7,19 @@
     <li>
       <a href='/' >Home</a>
     </li>
-    <li >
-      <a href='/' >About Us</a>
-    </li>
-    <li >
+    <!-- <li >
       <a href='/' >Services</a>
+    </li> -->
+    <li >
+      <a href='/product'>Product</a>
     </li>
     <li >
       <a href='/cart' >Cart</a>
     </li>
     <li >
-      <a href='/' >Pricing</a>
+      <a href='/order/' >Order</a>
     </li>
-    <li >
-      <a href='/product'>Product</a>
-    </li>
+    {% if not user.is_authenticated %}
     <li >
       <a href='/account/login/' >Login</a>
     </li>
@@ -29,8 +27,18 @@
       <a href='/account/signup/' >Register</a>
     </li>
     <li >
-      <a href='/admin' >Admin</a>
+      <a href='/admin' >Admin Login</a>
     </li>
+    {% endif %}
+    {% if user.is_authenticated %}
+    <li >
+      <a href='/account/profile/' >Profile</a>
+    </li>
+    <li >
+      <a href='/account/logout/' >Logout</a>
+    </li>
+    {% endif %}
+    
   </ul>
 </section>
 

@@ -4,5 +4,25 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"python.pythonPath": "/Users/abhishek_kumar/.local/share/virtualenvs/inventory-RP8HKyjL/bin/python",
+		"jupyter.jupyterServerType": "local",
+		"python.linting.pylintEnabled": true,
+		"python.linting.enabled": true
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Python: Django",
+				"type": "python",
+				"request": "launch",
+				"program": "${workspaceFolder}/manage.py",
+				"args": [
+					"runserver"
+				],
+				"django": true
+			}
+		]
+	}
 }

@@ -30,6 +30,11 @@ def signup(request):
             return redirect("home")
     return render(request,'signup.html',context)
 
+
+def user_profile(request):
+    context = {"message": "You have been reached the profile page."}
+    return render(request, "page_404.html", context)
+
 def home(request):
     context = {"message": "You have been reached the home page."}
     return render(request, "index.html", context)

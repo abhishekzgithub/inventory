@@ -1,7 +1,23 @@
 python manage.py runserver
 python manage.py makemigrations && python manage.py migrate
-manage.py migrate --run-syncdb
+python manage.py migrate --run-syncdb
 python manage.py createsuperuser
+
+for sqlite:
+    python manage.py dbshell 
+for model:
+    python manage.py shell
+
+regular queries:
+    https://docs.djangoproject.com/en/3.2/topics/db/queries/#
+    Cart.objects.get(id=1).product.all()
+    cart_obj=Cart.objects.create(user=User.objects.get(id=2))
+    cart_obj.product.add(Product.objects.get(id=5))
+    cart_obj.save()
+    
+    User.objects.create(email="abhi@gmail.com",full_name="abhishek kumar", is_active=True, staff=True, admin=False,phone_number='+917277905904').save()
+    Product.objects.create(title="Washing2",slug="washing2", description="Washing2",price=50,active=True).save()
+
 
 https://www.w3docs.com/learn-css/the-ultimate-guide-to-flexbox.html#align-items
 
