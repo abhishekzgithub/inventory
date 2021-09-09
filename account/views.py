@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import SignUpForm
+from account.forms import SignUpForm, LoginForm
 from django.contrib.auth import login, authenticate, logout
-from pdb import set_trace
-from .forms import LoginForm
+
 # Create your views here.
 
 def login_page(request):

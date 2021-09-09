@@ -5,26 +5,31 @@
     <h1>Cart</h1>
     <h1>{{ message }}</h1>
     <table class="container">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Subtotal</th>
-            <th>Total</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for cart in form %}
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for prod in cart.product.all %}
-                <tr>
-                    <td>{{ prod.id }}</td>
+            <tr>
+                    <td>{{ forloop.counter }}</td>
                     <td>{{ prod.title }}</td>
                     <td>{{ prod.price }}</td>
-                </tr>
+            </tr>
             {% endfor %}
-        {% endfor %}
-    </tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ cart.cart_total_products }}</td>
+            <td>{{ cart.cart_total }}</td>
+        </tr>
+        </tbody>
     </table>
 
 {% endblock %}

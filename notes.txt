@@ -12,6 +12,8 @@ for model:
     python manage.py shell
 
 regular queries:
+https://medium.com/@singhgautam7/django-annotations-steroids-to-your-querysets-766231f0823a
+    https://docs.djangoproject.com/en/3.2/ref/models/querysets/#annotate
     https://docs.djangoproject.com/en/3.2/topics/db/queries/#
     Cart.objects.get(id=1).product.all()
     cart_obj=Cart.objects.create(user=User.objects.get(id=2))

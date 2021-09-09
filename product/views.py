@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import ProductForm
-from .models import Product
-# Create your views here.
+from product.forms import ProductForm
+from product.models import Product
+
 def product_view(request):
     context = {"message": "You have reached the Product page."}
     context["form"]=Product.objects.all()

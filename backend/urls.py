@@ -29,7 +29,7 @@ urlpatterns = [
     path('example/', TemplateView.as_view(template_name='example.html')),
     url("^product/",include(("product.urls","product"), namespace="product")),
     url("^cart/",include(("cart.urls","cart"), namespace="cart")),
-    #url("^order/",include(("order.urls","order"), namespace="order")),
+    url("^order/",include(("order.urls","order"), namespace="order"))
 ]
 
 #urlpatterns += staticfiles_urlpatterns()

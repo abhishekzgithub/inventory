@@ -1,7 +1,6 @@
 from django.conf.urls import url, include
-# from .views import cart_view, cart_update
+import order.views as order_views
 
-# urlpatterns = [
-#     url("^$", cart_view, name="cart_page"),
-#     url("^cart_update/$", cart_update, name="update"),
-# ]
+urlpatterns = [
+    url("^$", order_views.get_orders, name="get_orders"),
+]

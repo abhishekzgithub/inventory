@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
-from .models import Cart
+from cart.models import Cart
 from account.models import User
 from product.models import Product
 # Create your views here.
 
 def cart_view(request):
     context = {"message": "You have reached the Cart page."}
-    cart_obj=Cart.objects.all()
-    context["form"] = cart_obj
+    user_email=request.user.email
+    cart_obj=Cart.objects.get_or_create(user=User.objects.get(email=user_email))[0]
+    context["cart"] = cart_obj
     return render(request, "cart/cart.html", context)
 
 def cart_update(request):
