@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Cart
+from account.models import User
+from product.models import Product
 # Create your views here.
 
 def cart_view(request):
@@ -15,7 +17,20 @@ def cart_update(request):
     if method is delete, then delete the product from the cart class
     """
     print(request.POST)
+    user_email=request.user.email
     product_id = request.POST.get('product_id')
     context={}
-    Cart().save()
+    cart_obj=Cart.objects.get_or_create(user=User.objects.get(email=user_email))[0]
+    cart_obj.product.add(Product.objects.get(id=product_id))
+    cart_obj.save()
+    return render(request, "cart/cart.html", context)
+
+def cart_delete(request):
+    print(request.POST)
+    user_email=request.user.email
+    product_id = request.POST.get('product_id')
+    context={}
+    cart_obj=Cart.objects.get_or_create(user=User.objects.get(email=user_email))[0]
+    cart_obj.product.remove(Product.objects.get(id=product_id))
+    cart_obj.save()
     return render(request, "cart/cart.html", context)
