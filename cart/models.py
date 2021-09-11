@@ -1,9 +1,6 @@
 from django.db import models
 from product.models import Product
 from django.conf import settings
-from django.db.models.signals import pre_save, post_save, m2m_changed, pre_delete, post_delete
-from decimal import Decimal
-from django.db.models import Count
 
 User = settings.AUTH_USER_MODEL
 

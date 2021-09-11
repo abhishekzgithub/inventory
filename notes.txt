@@ -19,7 +19,11 @@ https://medium.com/@singhgautam7/django-annotations-steroids-to-your-querysets-7
     cart_obj=Cart.objects.create(user=User.objects.get(id=2))
     cart_obj.product.add(Product.objects.get(id=5))
     cart_obj.save()
-    
+    #take the last cart
+    Order.objects.get_or_create(user=User.objects.get(email="abhishek@gmail.com")
+            ,cart=Cart.objects.get(user=User.objects.get(email="abhishek@gmail.com"))
+            ,active=True, shipping_cost=100.0,total=125.00
+            ,delivery_address=Address.objects.get(user=User.objects.get(email="abhishek@gmail.com")))
     User.objects.create(email="abhi@gmail.com",full_name="abhishek kumar", is_active=True, staff=True, admin=False,phone_number='+917277905904').save()
     Product.objects.create(title="Washing2",slug="washing2", description="Washing2",price=50,active=True).save()
 
@@ -28,3 +32,23 @@ https://www.w3docs.com/learn-css/the-ultimate-guide-to-flexbox.html#align-items
 
 https://web.dev/one-line-layouts/
 https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child
+
+from order.forms import OrderForm
+from account.models import User
+from cart.models import Cart
+
+class CommentForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['name'].widget.attrs.update({'class': 'special'})
+        self.fields['comment'].widget.attrs.update(size='40')
+
+
+form=OrderForm(
+        initial=model_to_dict(order_obj)
+        # {
+        #     'user': User.objects.get(email=user_email),
+        #     'cart': Cart.objects.filter(user=user_obj).latest('updated_timestamp'),
+
+        # }
+    )

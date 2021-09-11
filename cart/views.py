@@ -7,7 +7,7 @@ from product.models import Product
 def cart_view(request):
     context = {"message": "You have reached the Cart page."}
     user_email=request.user.email
-    cart_obj=Cart.objects.get_or_create(user=User.objects.get(email=user_email))[0]
+    cart_obj=Cart.objects.filter(user=User.objects.get(email=user_email)).latest('updated_timestamp')
     context["cart"] = cart_obj
     return render(request, "cart/cart.html", context)
 
