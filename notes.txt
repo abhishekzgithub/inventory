@@ -42,8 +42,11 @@ class CommentForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['name'].widget.attrs.update({'class': 'special'})
         self.fields['comment'].widget.attrs.update(size='40')
+        self.fields['user'].queryset=instance.user
 
-
+# filter has to go always, exception wont be shown
+form.fields["user"].queryset = User.objects.filter(email=user_email)
+https://simpleisbetterthancomplex.com/questions/2017/03/22/how-to-dynamically-filter-modelchoices-queryset-in-a-modelform.html
 form=OrderForm(
         initial=model_to_dict(order_obj)
         # {

@@ -1,16 +1,11 @@
 from django.shortcuts import render, redirect
 from product.forms import ProductForm
 from product.models import Product
+from django.http import HttpResponseRedirect
 
 def product_view(request):
     context = {"message": "You have reached the Product page."}
     context["form"]=Product.objects.all()
-    if request.method == "POST":
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            # email = form.cleaned_data.get("email")
-            # password = form.cleaned_data.get("password")
-            return redirect("home")
     return render(request, "product/product.html", context)
 
 def per_product_view(request,id):

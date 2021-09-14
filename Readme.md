@@ -6,3 +6,4 @@
 4. make the calendar
 5. make the chat section
 6. make the geomap for delivery
+7. make the login and register page

@@ -14,7 +14,7 @@ ORDER_STATUS_CHOICES = (
 class Order(models.Model):
     user                = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     cart                = models.ForeignKey(Cart, on_delete=models.CASCADE)
-    delivery_address    = models.ForeignKey(Address,on_delete=models.CASCADE, related_name="delivery")
+    delivery_address    = models.ForeignKey(Address,null=True, blank=True, on_delete=models.CASCADE, related_name="delivery")
     active              = models.BooleanField(default=True)
     status              = models.CharField(max_length=120, default='created', choices=ORDER_STATUS_CHOICES)
     shipping_cost       = models.DecimalField(default=25, max_digits=100, decimal_places=2)

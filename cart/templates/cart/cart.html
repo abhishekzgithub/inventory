@@ -2,7 +2,11 @@
 {% load static %}
 
 {% block content %}
-    <h1>Cart</h1>
+    <h1>Cart
+        <a
+            href=' {% url "order:create_order" %} '>Create order
+        </a>
+    </h1>
     <h1>{{ message }}</h1>
     <table class="container">
         <thead>
