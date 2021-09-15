@@ -6,13 +6,19 @@ from django.contrib.auth import login, authenticate, logout
 
 def login_page(request):
     context = {"message": "You have reached the Login page."}
-    context["form"]=LoginForm()
+    context["form"]=LoginForm(request)
     if request.method == "POST":
-        form = LoginForm(request.POST)
+        form = LoginForm(request,data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get("email")
-            password = form.cleaned_data.get("password")
-            return redirect("home")
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=raw_password)
+            if user:
+                login(request, user)
+                return redirect("home")
+        else:
+            print(form.errors)
+            print(form.error_messages)
     return render(request, "login.html", context)
 
 def signup(request):
@@ -31,6 +37,7 @@ def signup(request):
         elif form.errors:
             context["errors"]=form.errors
             print(form.errors)
+            print(form.error_messages)
     return render(request,'signup.html',context)
 
 

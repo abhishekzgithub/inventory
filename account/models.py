@@ -50,15 +50,15 @@ class User(AbstractBaseUser):
     email       = models.EmailField(max_length=255, unique=True)
     username    = models.CharField(max_length=255, blank=True, null=True, unique=True)
     address     = models.ForeignKey(Address, null=True, blank=True, on_delete=models.DO_NOTHING) 
-    is_active   = models.BooleanField(default=True, null=True, blank=True) # can login 
-    staff       = models.BooleanField(default=False, null=True, blank=True) # staff user non superuser
-    admin       = models.BooleanField(default=False, null=True, blank=True) # superuser 
+    is_active   = models.BooleanField(default=True, blank=True) # can login 
+    staff       = models.BooleanField(default=True, blank=True) # staff user non superuser
+    admin       = models.BooleanField(default=False, blank=True) # superuser 
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+919876543210'. Up to 15 digits allowed.")
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, null=True) # validators should be a list
     created_timestamp = models.DateTimeField(auto_now=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
     
-    USERNAME_FIELD = "email" #'username' #
+    USERNAME_FIELD = "username" #'username' #
     # USERNAME_FIELD and password are required by default
     REQUIRED_FIELDS = ["phone_number"] #['full_name'] #python manage.py createsuperuser
 
