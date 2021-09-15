@@ -6,6 +6,7 @@ User = settings.AUTH_USER_MODEL
 
 class Cart(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    active  = models.BooleanField(default=True) 
     product = models.ManyToManyField(Product, blank=True)
     created_timestamp = models.DateTimeField(auto_now=True)
     updated_timestamp = models.DateTimeField(auto_now=True)

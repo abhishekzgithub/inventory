@@ -3,41 +3,41 @@ from django.db import models
 # Create your models here.
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import RegexValidator
+from address.models import Address
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, phone_number, full_name=None, password=None, is_active=True, is_staff=False, is_admin=False):
-        if not email:
-            raise ValueError("Users must have an email address")
-        if not password:
-            raise ValueError("Users must have a password")
-        if not phone_number:
-            raise ValueError("Users must have a phone number")
+    def create_user(self, email, phone_number,
+                          username=None, password=None,
+                          is_active=True, is_staff=False,
+                          is_admin=False):
         user_obj = self.model(
             email = self.normalize_email(email),
-            full_name=full_name,
+            username=username,
             phone_number=phone_number
         )
         user_obj.set_password(password) # change user password
         user_obj.staff = is_staff
-        user_obj.admin = is_admin
-        user_obj.is_active = is_active
+        user_obj.admin = not is_staff
+        user_obj.is_active = True
         user_obj.save(using=self._db)
         return user_obj
 
-    def create_staffuser(self, email, phone_number, full_name=None, password=None):
+    def create_staffuser(self, email, phone_number,
+                                username=None, password=None):
         user = self.create_user(
                 email,
-                full_name=full_name,
+                username=username,
                 password=password,
                 phone_number=phone_number,
                 is_staff=True
         )
         return user
 
-    def create_superuser(self, email, phone_number, full_name=None, password=None):
+    def create_superuser(self, email, phone_number, username=None,
+                                password=None):
         user = self.create_user(
                 email,
-                full_name=full_name,
+                username=username,
                 password=password,
                 phone_number=phone_number,
                 is_staff=True,
@@ -48,17 +48,17 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     email       = models.EmailField(max_length=255, unique=True)
-    full_name   = models.CharField(max_length=255, blank=True, null=True)
-    is_active   = models.BooleanField(default=True) # can login 
-    staff       = models.BooleanField(default=False) # staff user non superuser
-    admin       = models.BooleanField(default=False) # superuser 
-    timestamp   = models.DateTimeField(auto_now_add=True)
+    username    = models.CharField(max_length=255, blank=True, null=True, unique=True)
+    address     = models.ForeignKey(Address, null=True, blank=True, on_delete=models.DO_NOTHING) 
+    is_active   = models.BooleanField(default=True, null=True, blank=True) # can login 
+    staff       = models.BooleanField(default=False, null=True, blank=True) # staff user non superuser
+    admin       = models.BooleanField(default=False, null=True, blank=True) # superuser 
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+919876543210'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validators should be a list
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, null=True) # validators should be a list
     created_timestamp = models.DateTimeField(auto_now=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
     
-    USERNAME_FIELD = 'email' #username
+    USERNAME_FIELD = "email" #'username' #
     # USERNAME_FIELD and password are required by default
     REQUIRED_FIELDS = ["phone_number"] #['full_name'] #python manage.py createsuperuser
 
@@ -67,9 +67,9 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.email
 
-    def get_full_name(self):
-        if self.full_name:
-            return self.full_name
+    def get_username(self):
+        if self.username:
+            return self.username
         return self.email
 
     def get_short_name(self):
@@ -89,10 +89,14 @@ class User(AbstractBaseUser):
 
     @property
     def is_admin(self):
-        return self.admin
-    class Meta:
-        db_table = "account_user"
+        return self.is_admin
+
     # @property
     # def is_active(self):
-    #     return self.active
+    #     return self.is_active
+
+    class Meta:
+        db_table = "account_user"
+    
+    
 

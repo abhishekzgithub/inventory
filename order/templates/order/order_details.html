@@ -3,9 +3,11 @@
 {% block content %}
     <h1>Order</h1>
     <h1>{{ message }}</h1>
-    <form action='{% url "order:order_details" %}' method="GET">
+    <form action='{% url "order:order_view" %}' method="GET">
         {% csrf_token %}
-        {{ form }}
+        {% if form %}
+            {{ form }}
+        {% endif %}
          
     </form>
 

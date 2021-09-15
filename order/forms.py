@@ -10,8 +10,6 @@ class OrderForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['shipping_cost'].widget.attrs={'disabled': 'true'}
         self.fields['total'].widget.attrs={'disabled': 'true'}
-        
-        
 
     class Meta:
         model = Order

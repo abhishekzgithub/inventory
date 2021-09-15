@@ -22,7 +22,7 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            full_name = form.cleaned_data.get('full_name')
+            full_name = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=full_name, password=raw_password)
             login(request, user)

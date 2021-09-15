@@ -1,7 +1,7 @@
 from django.db import models
 # Create your models here.
 from django.urls import reverse
-from account.models import User
+#from account.models import User
 
 ADDRESS_TYPES = (
     ('billing', 'Billing address'),
@@ -9,9 +9,9 @@ ADDRESS_TYPES = (
 )
 
 class Address(models.Model):
-    user            = models.ForeignKey(User,on_delete=models.CASCADE)
-    name            = models.CharField(max_length=120, null=True, blank=True, help_text='Shipping to? Who is it for?')
-    nickname        = models.CharField(max_length=120, null=True, blank=True, help_text='Internal Reference Nickname')
+    #user            = models.ForeignKey(User,on_delete=models.CASCADE)
+    name            = models.CharField(max_length=120, unique=True, null=True, blank=True, help_text='Shipping to? Who is it for?')
+    nickname        = models.CharField(max_length=120, unique=True, null=True, blank=True, help_text='Internal Reference Nickname')
     address_type    = models.CharField(max_length=120, choices=ADDRESS_TYPES)
     address_line_1  = models.CharField(max_length=120)
     address_line_2  = models.CharField(max_length=120, null=True, blank=True)

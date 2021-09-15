@@ -45,7 +45,8 @@ class CommentForm(forms.ModelForm):
         self.fields['user'].queryset=instance.user
 
 # filter has to go always, exception wont be shown
-form.fields["user"].queryset = User.objects.filter(email=user_email)
+form.fields["user"].queryset = User.objects.filter(email=user_email) # this is lazy evaluated so cannot put objects
+form.fields["shipping_cost"].initial = 29
 https://simpleisbetterthancomplex.com/questions/2017/03/22/how-to-dynamically-filter-modelchoices-queryset-in-a-modelform.html
 form=OrderForm(
         initial=model_to_dict(order_obj)
