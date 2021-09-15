@@ -21,12 +21,16 @@ def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
-            full_name = form.cleaned_data.get('email')
+            form.save(commit=True)
+            username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=full_name, password=raw_password)
-            login(request, user)
-            return redirect("home")
+            user = authenticate(username=username, password=raw_password)
+            if user:
+                login(request, user)
+                return redirect("home")
+        elif form.errors:
+            context["errors"]=form.errors
+            print(form.errors)
     return render(request,'signup.html',context)
 
 
