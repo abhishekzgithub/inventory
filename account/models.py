@@ -16,7 +16,7 @@ class UserManager(BaseUserManager):
             phone_number=phone_number
         )
         user_obj.set_password(password) # change user password
-        user_obj.staff = is_staff
+        user_obj.staff = True
         user_obj.admin = not is_staff
         user_obj.is_active = True
         user_obj.save(using=self._db)
@@ -29,7 +29,7 @@ class UserManager(BaseUserManager):
                 username=username,
                 password=password,
                 phone_number=phone_number,
-                is_staff=True
+                staff=True
         )
         return user
 
@@ -40,8 +40,8 @@ class UserManager(BaseUserManager):
                 username=username,
                 password=password,
                 phone_number=phone_number,
-                is_staff=True,
-                is_admin=True
+                staff=True,
+                admin=True
         )
         return user
 
@@ -84,16 +84,13 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         if self.is_admin:
-            return True
+            return False
         return self.staff
 
     @property
     def is_admin(self):
-        return self.is_admin
+        return self.admin
 
-    # @property
-    # def is_active(self):
-    #     return self.is_active
 
     class Meta:
         db_table = "account_user"

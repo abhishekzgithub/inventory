@@ -51,4 +51,5 @@ def home(request):
 
 def logout_page(request):
     context = {"message": "You have been logged out."}
+    logout(request)
     return render(request, "index.html", context)
