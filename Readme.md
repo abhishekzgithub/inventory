@@ -6,4 +6,6 @@
 4. make the calendar
 5. make the chat section
 6. make the geomap for delivery
-7. make the login and register page
+7. make the login and register page : done
+8. add product page for admin
+9. add address

@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from account.forms import SignUpForm, LoginForm
-from django.contrib.auth import login, authenticate, logout
-
-# Create your views here.
+from account.forms import SignUpForm, LoginForm, UserProfileForm, UserPasswordChangeForm
+from django.contrib.auth import login, authenticate, logout, views
+from django.views.generic import FormView, DetailView
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from account.models import User
 
 def login_page(request):
     context = {"message": "You have reached the Login page."}
@@ -17,6 +19,7 @@ def login_page(request):
                 login(request, user)
                 return redirect("home")
         else:
+            context["error"]=form.error_messages
             print(form.errors)
             print(form.error_messages)
     return render(request, "login.html", context)
@@ -35,15 +38,39 @@ def signup(request):
                 login(request, user)
                 return redirect("home")
         elif form.errors:
-            context["errors"]=form.errors
+            context["errors"]=form.error_messages
             print(form.errors)
             print(form.error_messages)
     return render(request,'signup.html',context)
 
 
+class UserProfile(DetailView):
+    template_name="user_profile.html"
+    form_class= UserProfileForm
+    model = User
+    success_url = "/account/profile"
+    def get_context_data(self, **kwargs):
+        context = super(UserProfile, self).get_context_data(**kwargs)
+        context['form'] = UserProfileForm
+        return context
+    # def form_valid(self, form):
+    #     form.save()
+    #     return super(UserProfile, self).form_valid(form)
+
+def password_change(request):
+    from django.contrib.auth import update_session_auth_hash
+    if request.method == 'POST':
+        form = UserPasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+
+@login_required
 def user_profile(request):
-    context = {"message": "You have been reached the profile page."}
-    return render(request, "page_404.html", context)
+    user_obj=User.objects.get(email=request.user.email)
+    context = {"message": "{} has reached the profile page.".format(request.user)}
+    context["user"]=user_obj
+    return render(request, "user_profile.html", context)
 
 def home(request):
     context = {"message": "You have been reached the home page."}
@@ -51,5 +78,4 @@ def home(request):
 
 def logout_page(request):
     context = {"message": "You have been logged out."}
-    logout(request)
-    return render(request, "index.html", context)
+    return views.logout_then_login(request, login_url="/account/login")

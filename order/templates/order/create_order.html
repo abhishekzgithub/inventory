@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
     <h1>Order</h1>
     <h1>{{ message }}</h1>
     <form action='{% url "order:create_order" %}' method="POST">
         {% csrf_token %}
         {% if form %}
-            {{ form }}
+            {{ form|crispy }}
             <input type="submit" value="Submit">
         {% endif %}
     </form>

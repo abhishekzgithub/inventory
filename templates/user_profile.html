@@ -1,0 +1,20 @@
+
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+  {% include "js.html" %}
+    <h1>Profile</h1>
+    <h1>{{ message }}</h1>
+    {% if user %}
+      {{ user.username}}
+      {{ user.email}}
+      {{ user.address}}
+      <a href="/address/create/" >Create address</a>
+      {{ user.phone_number}}
+      
+    
+    {% endif %}
+
+{% endblock %}

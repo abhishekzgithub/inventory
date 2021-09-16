@@ -6,10 +6,15 @@
   {% include "js.html" %}
     <h1>Login</h1>
     <h1>{{ message }}</h1>
+    {% if form %}
     <form method="post">
       {% csrf_token %}
       {{ form|crispy }}
       <button type="submit">Login</button>
     </form>
+    {% endif %}
+    {% if error %}
+    {{ error.invalid_login }}
+    {% endif %}
 
 {% endblock %}

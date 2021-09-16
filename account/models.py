@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.core.validators import RegexValidator
-from address.models import Address
 
 class UserManager(BaseUserManager):
     def create_user(self, email, phone_number,
@@ -49,7 +48,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     email       = models.EmailField(max_length=255, unique=True)
     username    = models.CharField(max_length=255, blank=True, null=True, unique=True)
-    address     = models.ForeignKey(Address, null=True, blank=True, on_delete=models.DO_NOTHING) 
+    #address     = models.ForeignKey(Address, null=True, blank=True, on_delete=models.DO_NOTHING) 
     is_active   = models.BooleanField(default=True, blank=True) # can login 
     staff       = models.BooleanField(default=True, blank=True) # staff user non superuser
     admin       = models.BooleanField(default=False, blank=True) # superuser 
