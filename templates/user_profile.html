@@ -10,11 +10,27 @@
     {% if user %}
       {{ user.username}}
       {{ user.email}}
-      {{ user.address}}
       <a href="/address/create/" >Create address</a>
       {{ user.phone_number}}
-      
-    
     {% endif %}
+    <ul>
+      {% if addresses %}
+      {% for address in addresses %}
+        <li>{{ address.id }}
+          <a href="/address/delete/{{ address.id }}">Delete address</a>
+        </li>
+        <li>{{ address.name }}</li>
+        <li>{{ address.nickname }}</li>
+        <li>{{ address.address_type }}</li>
+        <li>{{ address.address_line_1 }}</li>
+        <li>{{ address.address_line_2 }}</li>
+        <li>{{ address.city }}</li>
+        <li>{{ address.state }}</li>
+        <li>{{ address.country }}</li>
+        <li>{{ address.postal_code }}</li>
+      {% endfor %}
+    {% endif %}
+    </ul>
+    
 
 {% endblock %}
