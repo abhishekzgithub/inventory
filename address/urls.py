@@ -3,7 +3,7 @@ from address import views
 
 urlpatterns = [
     url("^create/$", views.AddressCreateView.as_view(), name="create_address"),
-    url(r'^delete/(?P<id>[\d]+)/$', views.delete_address, name="delete_address"),
-    url("^update/$", views.update_address, name="update_address"),
+    url(r'^delete/(?P<pk>[\d]+)/$', views.AddressDeleteView.as_view(), name="delete_address"),
+    url(r'^update/(?P<pk>[\d]+)/$', views.AddressUpdateView.as_view(), name="update_address"),
     
 ]

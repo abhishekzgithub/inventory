@@ -17,6 +17,7 @@
       {% if addresses %}
       {% for address in addresses %}
         <li>{{ address.id }}
+          <a href="/address/update/{{ address.id }}">Update address</a>
           <a href="/address/delete/{{ address.id }}">Delete address</a>
         </li>
         <li>{{ address.name }}</li>

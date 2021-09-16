@@ -51,3 +51,4 @@ class Address(models.Model):
             )
     class Meta:
         db_table = "address"
+        unique_together = [['user', 'name', 'nickname']]
