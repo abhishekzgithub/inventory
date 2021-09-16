@@ -5,36 +5,22 @@ from address.models import Address
 from account.models import User
 
 class AddressCreateView(View):
-    def get(self, request):
-        context={}
+    def get(self, request, context={}):
         form=AddressForm()
         context["form"]=form
         return render(request, "address/address.html", context)
 
-    def post(self, request):
-        context={}
+    def post(self, request, context={}):
         username = request.user.username
         form=AddressForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("/account/profile/")
         else:
-            print(form.errors)
             context["errors"]=form.errors
-            form=AddressForm()
-            context["form"]=form
-        return render(request, "address/address.html", context)
+            return self.get(request, context)
 
-class AddressDetails(View):
-    def get(self, request):
-        context={}
-        form=AddressForm()
-        context["form"]=form
-        return render(request, "address/address.html", context)
-    
 
-def create_address(request):
-    pass
 
 def delete_address(request, id):
     user_email=request.user.email
