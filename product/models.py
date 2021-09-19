@@ -86,5 +86,6 @@ class Product(models.Model):
 
     class Meta:
         db_table = "product"
+        ordering = ['-updated_timestamp']
 
     

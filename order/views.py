@@ -45,11 +45,12 @@ def create_order(request):
             if user_email:
                 user_obj=User.objects.get(email=user_email)
                 cart_obj=Cart.objects.filter(user=user_obj)
+                address_obj = Address.objects.filter(user=user_obj)
                 if cart_obj and user_obj:
+                    form=OrderForm()
                     cart_obj=cart_obj.latest('updated_timestamp')
                     form.fields["user"].queryset = User.objects.filter(email=user_email)
                     form.fields["cart"].queryset = Cart.objects.filter(user=user_obj)
-                    form.fields["delivery_address"].queryset = Address.objects.filter(user=user_obj)
                     form.fields["shipping_cost"].initial = 29
                     form.fields["total"].initial = cart_obj.cart_total+29
         except Exception as exc:
@@ -59,6 +60,6 @@ def create_order(request):
             form = OrderForm(request.POST)
             if form.is_valid():
                 form.save()
-                return HttpResponseRedirect("/order")
+                return redirect("/order")
     return render(request, "order/create_order.html", context)
 

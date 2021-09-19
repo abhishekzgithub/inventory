@@ -6,30 +6,20 @@
 <section class="cls-product-container">
     <h1>Products</h1>
     <h1>{{ message }}</h1>
-    <a href="{% url 'product:create' %}">Create Product</a>
-    
     <ul class="cls-product">
         {% for product in products %}
         <li class="cls-product-items">
-            <a href="{{ product.id }}">
-                <a href="/product/update/{{ product.id }}/">Update Product</a>
-                <a href="/product/delete/{{ product.id }}/">Delete Product</a>
+            <a href="{% url 'product:update' product.id %}">Update Product</a>
+            <a href="{% url 'product:delete' product.id %}">Delete Product</a>
+            <p>{{ product.title }}</p>
+            <p>{{ product.price }}</p>
+            <a href="">
                 <img src="{% get_media_prefix %}{{product.image}}"/>
             </a>
-            <p>{{ product.title }}</p>
             <section>
                 {% include "cart/add_to_cart.html" with product_id=product.id %}
                 {% include "cart/remove_from_cart.html" with product_id=product.id %}
             </section>
-            
-            <!-- <button data-product="{{product.id}}" data-action="add" class="update-cart">Add to Cart</button> -->
-            <!-- <a href="#" id="cls-product-quantity-increment">
-                <i class="fas fa-plus-circle" aria-hidden="true"></i>
-            </a>
-            <input type="text" id="cls-product-quantity" value=""></input>
-            <a href="#" class="cls-product-quantity-decrement">
-                <i class="fas fa-minus"></i>
-            </a> -->
         </li>
         {% endfor %}
     </ul>

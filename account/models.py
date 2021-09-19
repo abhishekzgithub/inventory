@@ -47,13 +47,12 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser):
     email       = models.EmailField(max_length=255, unique=True)
-    username    = models.CharField(max_length=255, blank=True, null=True, unique=True)
-    #address     = models.ForeignKey(Address, null=True, blank=True, on_delete=models.DO_NOTHING) 
-    is_active   = models.BooleanField(default=True, blank=True) # can login 
-    staff       = models.BooleanField(default=True, blank=True) # staff user non superuser
-    admin       = models.BooleanField(default=False, blank=True) # superuser 
+    username    = models.CharField(max_length=255, blank=False, null=False, unique=True)
+    is_active   = models.BooleanField(default=True) # can login 
+    staff       = models.BooleanField(default=True) # staff user non superuser
+    admin       = models.BooleanField(default=False) # superuser 
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+919876543210'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True, null=True) # validators should be a list
+    phone_number = models.CharField(default="+91",validators=[phone_regex], max_length=17, blank=True, null=True) # validators should be a list
     created_timestamp = models.DateTimeField(auto_now=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
     
@@ -64,15 +63,14 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     def __str__(self):
-        return self.email
+        return self.username
 
     def get_username(self):
         if self.username:
             return self.username
-        return self.email
 
     def get_short_name(self):
-        return self.email
+        return self.username
 
     def has_perm(self, perm, obj=None):
         return True
@@ -93,6 +91,8 @@ class User(AbstractBaseUser):
 
     class Meta:
         db_table = "account_user"
+        ordering = ['-updated_timestamp']
+
     
     
 

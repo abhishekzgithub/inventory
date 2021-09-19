@@ -8,6 +8,7 @@
         </a>
     </h1>
     <h1>{{ message }}</h1>
+    {% if cart %}
     <table class="container">
         <thead>
             <tr>
@@ -22,7 +23,10 @@
             {% for prod in cart.product.all %}
             <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ prod.title }}</td>
+                    <td><a href="{% url 'product:per_product_detail' prod.id %}">
+                        {{ prod.title }}
+                        </a>
+                    </td>
                     <td>{{ prod.price }}</td>
             </tr>
             {% endfor %}
@@ -35,5 +39,5 @@
         </tr>
         </tbody>
     </table>
-
+    {% endif %}
 {% endblock %}

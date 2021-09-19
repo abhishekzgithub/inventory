@@ -51,4 +51,5 @@ class Address(models.Model):
             )
     class Meta:
         db_table = "address"
+        ordering = ['-updated_timestamp']
         unique_together = [['user', 'name', 'nickname']]

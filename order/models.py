@@ -18,14 +18,15 @@ class Order(models.Model):
     active              = models.BooleanField(default=True)
     status              = models.CharField(max_length=120, default='created', choices=ORDER_STATUS_CHOICES)
     coupon              = models.CharField(max_length=120, null=True, blank=True)
-    discount            = models.DecimalField(default=25, max_digits=100, decimal_places=2)
-    shipping_cost       = models.DecimalField(default=25, max_digits=100, decimal_places=2)
+    discount            = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    shipping_cost       = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     total               = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     created_timestamp = models.DateTimeField(auto_now=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        db_table = "order"
 
     def __str__(self):
         return str(self.id)
+    
+    class Meta:
+        db_table = "order"
+        ordering = ['-updated_timestamp']

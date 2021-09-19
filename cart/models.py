@@ -10,8 +10,7 @@ class Cart(models.Model):
     product = models.ManyToManyField(Product, blank=True)
     created_timestamp = models.DateTimeField(auto_now=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
-    class Meta:
-        db_table = "cart"
+
 
     def __str__(self):
         return str(self.id)
@@ -23,12 +22,14 @@ class Cart(models.Model):
     
     @property
     def cart_total(self):
-        print(self.product.all())
         total=sum([i.price for i in self.product.all()])
         return total
     
     @property
     def cart_total_products(self):
-        print(self.product.all())
         total_products=len(self.product.all())
         return total_products
+
+    class Meta:
+        ordering = ['-updated_timestamp']
+        db_table = "cart"
