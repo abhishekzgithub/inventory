@@ -3,6 +3,7 @@ from django.urls import reverse
 import random
 import os
 from django.db.models import Q
+from account.models import User
 
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
@@ -41,7 +42,7 @@ class ProductManager(models.Manager):
     def all(self):
         return self.get_queryset().active()
 
-    def featured(self): #Product.objects.featured()
+    def featured(self):
         return self.get_queryset().featured()
 
     def get_by_id(self, id):
@@ -54,9 +55,10 @@ class ProductManager(models.Manager):
         return self.get_queryset().active().search(query)
 
 class Product(models.Model):
+    user            = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     title           = models.CharField(max_length=120)
     slug            = models.SlugField(blank=True, unique=True)
-    description     = models.TextField()
+    description     = models.CharField(max_length=120, null=True, blank=True)
     image           = models.FileField(upload_to=upload_image_path, null=True, blank=True)
     featured        = models.BooleanField(default=False)
     active          = models.BooleanField(default=True)
@@ -70,8 +72,7 @@ class Product(models.Model):
     objects = ProductManager()
 
     def get_absolute_url(self):
-        #return "/products/{slug}/".format(slug=self.slug)
-        return reverse("products:detail", kwargs={"slug": self.slug})
+        return reverse("products:details", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title

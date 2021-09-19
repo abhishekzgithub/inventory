@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 templates/navbar copy.html
 order/migrations/0002_alter_order_id.py
+/media/products/
+*/migrations/

@@ -11,9 +11,9 @@
     <ul class="cls-product">
         {% for product in products %}
         <li class="cls-product-items">
-            <a href="/product/update/{{ product.id }}/">Update Product</a>
-            <a href="/product/delete/{{ product.id }}/">Delete Product</a>
             <a href="{{ product.id }}">
+                <a href="/product/update/{{ product.id }}/">Update Product</a>
+                <a href="/product/delete/{{ product.id }}/">Delete Product</a>
                 <img src="{% get_media_prefix %}{{product.image}}"/>
             </a>
             <p>{{ product.title }}</p>

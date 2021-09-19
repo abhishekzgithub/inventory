@@ -12,7 +12,7 @@ ORDER_STATUS_CHOICES = (
 )
 
 class Order(models.Model):
-    user                = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    user                = models.ForeignKey(User, on_delete=models.CASCADE)
     cart                = models.ForeignKey(Cart, on_delete=models.CASCADE)
     delivery_address    = models.CharField(max_length=120, null=True, blank=True)
     active              = models.BooleanField(default=True)

@@ -7,18 +7,7 @@
     <li>
       <a href='/' >Home</a>
     </li>
-    <!-- <li >
-      <a href='/' >Services</a>
-    </li> -->
-    <li >
-      <a href='/product'>Product</a>
-    </li>
-    <li >
-      <a href='/cart' >Cart</a>
-    </li>
-    <li >
-      <a href='/order/' >Order</a>
-    </li>
+    
     {% if not user.is_authenticated %}
     <li >
       <a href='/account/login/' >Login</a>
@@ -32,11 +21,21 @@
     {% endif %}
     {% if user.is_authenticated %}
     <li >
+      <a href="/product">Product</a>
+    </li>
+    <li >
+      <a href='/cart' >Cart</a>
+    </li>
+    <li >
+      <a href='/order/' >Order</a>
+    </li>
+    <li >
       <a href='/account/profile/' >Profile</a>
     </li>
     <li >
       <a href='/account/logout/' >Logout</a>
     </li>
+    
     {% endif %}
     
   </ul>
