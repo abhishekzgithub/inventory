@@ -26,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '8%o5^zbt6-2u$2fgz7ks_^=6=_sj&87z)(k18nl6u#xx93xk0x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True # False for testing 404 page
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [] # testing for 404 page ['*']
 
 
 # Application definition
@@ -139,6 +139,6 @@ AUTH_USER_MODEL = 'account.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_URL = reverse_lazy('login')
+LOGIN_URL = 'account:login'
 LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')

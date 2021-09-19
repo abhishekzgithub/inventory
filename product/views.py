@@ -6,14 +6,19 @@ from product.forms import ProductForm
 from product.models import Product
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.conf import settings
 
+
+@login_required(login_url=settings.LOGIN_URL)
 def per_product_view(request,pk):
     context={"products":""}
     if request.method=="GET":
         context["products"] = Product.objects.filter(pk=pk).all()
     return render(request, "product/per_product_details.html", context)
 
-class ProductAllView(View):
+class ProductAllView(LoginRequiredMixin, View):
+    login_url = settings.LOGIN_URL
     def get(self, request, context={}):
         if request.user and (not request.user.is_anonymous) and (request.user.email) and (request.user.is_authenticated):
             context={"product":None}
@@ -24,20 +29,23 @@ class ProductAllView(View):
                 context["products"]=product_obj
         return render(request, "product/product_details.html", context)
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
+    login_url       = settings.LOGIN_URL
     model			= Product
     fields			= "__all__"
     template_name	= 'product/product.html'
     success_url		= reverse_lazy('product:details')
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
+    login_url       = settings.LOGIN_URL
     model			= Product
     form_class      = ProductForm
     template_name	= 'product/create_product.html'
     success_url		= reverse_lazy('product:details')
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    login_url       = settings.LOGIN_URL
     model			= Product
     #form_class      = ProductForm
     fields			= "__all__"
@@ -46,7 +54,8 @@ class ProductUpdateView(UpdateView):
     success_url		= reverse_lazy('product:details')
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    login_url       = settings.LOGIN_URL
     model			= Product
     form_class      = ProductForm
     template_name	= 'product/product_confirm_delete.html'

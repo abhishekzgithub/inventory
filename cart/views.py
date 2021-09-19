@@ -3,7 +3,11 @@ from cart.models import Cart
 from account.models import User
 from product.models import Product
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
+@login_required(login_url=settings.LOGIN_URL)
 def cart_view(request):
     user=request.user
     context = {"message": "{} has reached the Cart page.".format(user)}
@@ -16,6 +20,7 @@ def cart_view(request):
         context["cart"] = cart_obj
     return render(request, "cart/cart.html", context)
 
+@login_required(login_url=settings.LOGIN_URL)
 def cart_update(request):
     """
     get the product id and check if the method is add or delete
@@ -40,6 +45,7 @@ def cart_update(request):
             print(exc)
     return HttpResponseRedirect("/product")
 
+@login_required(login_url=settings.LOGIN_URL)
 def cart_delete(request):
     user=request.user
     if user and not user.is_anonymous:

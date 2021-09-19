@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from account.models import User
 from address.models import Address
+from django.conf import settings
 
 def login_page(request):
     context = {"message": "You have reached the Login page."}
@@ -55,7 +56,7 @@ class UserProfile(DetailView):
         context['form'] = UserProfileForm
         return context
 
-
+@login_required(login_url=settings.LOGIN_URL)
 def password_change(request):
     from django.contrib.auth import update_session_auth_hash
     if request.method == 'POST':
@@ -64,7 +65,7 @@ def password_change(request):
             form.save()
             update_session_auth_hash(request, form.user)
 
-@login_required
+@login_required(login_url=settings.LOGIN_URL)
 def user_profile(request):
     user_obj=User.objects.get(email=request.user.email)
     context = {"message": "{} has reached the profile page.".format(request.user)}
@@ -81,4 +82,8 @@ def home(request):
 
 def logout_page(request):
     context = {"message": "You have been logged out."}
-    return views.logout_then_login(request, login_url="/account/login")
+    return views.logout_then_login(request, login_url=settings.LOGIN_URL)
+
+def error_404(request, exception):
+    context={"data":exception}
+    return render(request, "page_404.html", context)

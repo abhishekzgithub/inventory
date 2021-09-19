@@ -6,8 +6,11 @@ from cart.models import Cart
 from address.models import Address
 from django.forms.models import model_to_dict
 from django.http import HttpResponseRedirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
-
+@login_required(login_url=settings.LOGIN_URL)
 def order_view(request):
     user=request.user
     context = {"message": "{} has reached the order_view page.".format(user)}
@@ -35,6 +38,7 @@ def order_view(request):
     context["form"]=form
     return render(request, "order/order_details.html", context)
 
+@login_required(login_url=settings.LOGIN_URL)
 def create_order(request):
     user=request.user
     context = {"message": "{} has reached the create_order page.".format(user)}
