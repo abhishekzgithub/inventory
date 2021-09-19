@@ -5,7 +5,7 @@ from account.models import User
 from product.forms import ProductForm
 from product.models import Product
 from django.http import HttpResponseRedirect
-
+from django.contrib.auth.decorators import login_required
 
 def per_product_view(request,pk):
     context={"products":""}
@@ -14,13 +14,14 @@ def per_product_view(request,pk):
     return render(request, "product/per_product_details.html", context)
 
 class ProductAllView(View):
-    def get(self, request):
-        context={"product":None}
-        context = {"message": "{} has reached the Product page.".format(request.user)}
-        product_obj=Product.objects.filter(user=User.objects.get(email=request.user.email))
-        if product_obj:
-            product_obj=product_obj.all()
-            context["products"]=product_obj
+    def get(self, request, context={}):
+        if request.user and (not request.user.is_anonymous) and (request.user.email) and (request.user.is_authenticated):
+            context={"product":None}
+            context = {"message": "{} has reached the Product page.".format(request.user)}
+            product_obj=Product.objects.filter(user=User.objects.get(email=request.user.email))
+            if product_obj:
+                product_obj=product_obj.all()
+                context["products"]=product_obj
         return render(request, "product/product_details.html", context)
 
 class ProductDetailView(DetailView):
