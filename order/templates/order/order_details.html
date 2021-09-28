@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
     <h1>Order</h1>
@@ -6,7 +7,7 @@
     <form action='{% url "order:order_view" %}' method="GET">
         {% csrf_token %}
         {% if form %}
-            {{ form }}
+            {{ form|crispy }}
         {% endif %}
          
     </form>

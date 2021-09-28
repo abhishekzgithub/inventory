@@ -18,3 +18,30 @@
     accounts/ password_reset/done/ [name='password_reset_done']
     accounts/ reset/<uidb64>/<token>/ [name='password_reset_confirm']
     accounts/ reset/done/ [name='password_reset_complete']
+
+
+-------App--------
+https://reactnative.dev/docs/environment-setup
+npx react-native init ecommerce
+expo init ecommerce
+
+To run your project, navigate to the directory and run one of the following yarn commands.
+
+- cd ecommerce
+- yarn start # you can open iOS, Android, or web from here, or run them directly with the commands below.
+- yarn android
+- yarn ios
+- yarn web
+
+http://localhost:19002
+
+› Press a │ open Android
+› Press i │ open iOS simulator
+› Press w │ open web
+
+› Press r │ reload app
+› Press m │ toggle menu
+› Press d │ show developer tools
+› shift+d │ toggle auto opening developer tools on startup (enabled)
+
+› Press ? │ show all commands

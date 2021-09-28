@@ -14,8 +14,8 @@ class OrderForm(forms.ModelForm):
     delivery_address    = forms.ChoiceField(choices=ADDRESS_TYPES)
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['shipping_cost'].widget.attrs={'disabled': 'true'}
-        self.fields['total'].widget.attrs={'disabled': 'true'}
+        #self.fields['shipping_cost'].widget.attrs={'disabled': 'true'}
+        #self.fields['total'].widget.attrs={'disabled': 'true'}
 
     class Meta:
         model = Order
