@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "react-inventory",
+    "slug": "react-inventory",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "react-inventory"
+}
