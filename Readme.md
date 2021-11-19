@@ -45,3 +45,8 @@ http://localhost:19002
 › shift+d │ toggle auto opening developer tools on startup (enabled)
 
 › Press ? │ show all commands
+
+---------setup-----
+0. npm install --global expo-cli
+1. npm install
+2. expo start --web
