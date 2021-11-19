@@ -5,7 +5,7 @@
 		}
 	],
 	"settings": {
-		"python.pythonPath": "/Users/abhishek_kumar/.local/share/virtualenvs/inventory-RP8HKyjL/bin/python",
+		"python.defaultInterpreterPath": "/home/abhishek/.local/share/virtualenvs/inventory-9eckcpOa/bin/python",
 		"jupyter.jupyterServerType": "local",
 		"python.linting.pylintEnabled": true,
 		"python.linting.enabled": true
