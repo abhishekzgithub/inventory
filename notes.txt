@@ -69,3 +69,14 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 @login_required(login_url=settings.LOGIN_URL)
 login_url=settings.LOGIN_URL
+
+
+--react native---
+https://www.instamobile.io/react-native-tutorials/react-native-app-ideas-beginners/
+https://github.com/ReactNativeNews/React-Native-Apps
+https://www.instamobile.io/app-templates/react-native-ecommerce-app-template/
+https://github.com/mxck/react-native-material-menu
+https://mrousavy.com/react-native-vision-camera/docs/guides/
+https://reactnative.directory/
+https://callstack.github.io/react-native-paper/getting-started.html
+https://materialdesignicons.com/
