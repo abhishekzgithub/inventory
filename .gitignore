@@ -133,3 +133,7 @@ order/migrations/0002_alter_order_id.py
 */migrations/
 /home/abhishek/work/projects/inventory/inventory.code-workspace
 .gitignore
+.expo-shared
+react-inventory/ios/reactinventory.xcodeproj/project.pbxproj
+react-inventory/ios/reactinventory/Supporting/Expo.plist
+react-inventory/ios/reactinventory.xcodeproj/xcshareddata/xcschemes/reactinventory.xcscheme

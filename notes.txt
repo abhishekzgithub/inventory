@@ -80,3 +80,11 @@ https://mrousavy.com/react-native-vision-camera/docs/guides/
 https://reactnative.directory/
 https://callstack.github.io/react-native-paper/getting-started.html
 https://materialdesignicons.com/
+
+=> If you wish to uninstall them at a later point (or re-install them under your
+=> `nvm` Nodes), you can remove them from the system Node as follows:
+
+     $ nvm use system
+     $ npm uninstall -g a_module
+
+sudo chown -R $(whoami) /usr/local/bin
