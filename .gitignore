@@ -133,3 +133,5 @@ order/migrations/0002_alter_order_id.py
 */migrations/
 /home/abhishek/work/projects/inventory/inventory.code-workspace
 .gitignore
+.vscode/launch.json
+.vscode/settings.json

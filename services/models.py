@@ -14,12 +14,12 @@ def upload_image_path(instance, filename):
     new_filename = random.randint(1,3910209312)
     name, ext = get_filename_ext(filename)
     final_filename = '{new_filename}{ext}'.format(new_filename=new_filename, ext=ext)
-    return "products/{new_filename}/{final_filename}".format(
+    return "services/{new_filename}/{final_filename}".format(
             new_filename=new_filename, 
             final_filename=final_filename
             )
 
-class ProductQuerySet(models.query.QuerySet):
+class ServicesQuerySet(models.query.QuerySet):
     def active(self):
         return self.filter(active=True)
 
@@ -35,9 +35,9 @@ class ProductQuerySet(models.query.QuerySet):
         # tshirt, t-shirt, t shirt, red, green, blue,
         return self.filter(lookups).distinct()
 
-class ProductManager(models.Manager):
+class ServicesManager(models.Manager):
     def get_queryset(self):
-        return ProductQuerySet(self.model, using=self._db)
+        return ServicesQuerySet(self.model, using=self._db)
 
     def all(self):
         return self.get_queryset().active()
@@ -54,7 +54,7 @@ class ProductManager(models.Manager):
     def search(self, query):
         return self.get_queryset().active().search(query)
 
-class Product(models.Model):
+class Services(models.Model):
     #user            = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     title           = models.CharField(max_length=120)
     #slug            = models.SlugField(blank=True, unique=True)
@@ -69,10 +69,10 @@ class Product(models.Model):
     created_timestamp = models.DateTimeField(auto_now=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
     
-    objects = ProductManager()
+    objects = ServicesManager()
 
     # def get_absolute_url(self):
-    #     return reverse("products:details", kwargs={"slug": self.slug})
+    #     return reverse("services:details", kwargs={"slug": self.slug})
 
     def __str__(self):
         return self.title
@@ -85,7 +85,7 @@ class Product(models.Model):
         return self.title
 
     class Meta:
-        db_table = "product"
+        db_table = "services"
         ordering = ['-updated_timestamp']
 
     

@@ -1,74 +1,69 @@
 from django.shortcuts import render, redirect
-from order.forms import OrderForm
-from order.models import Order
+from django.urls import reverse_lazy
+from order.forms import OrderForm, OrderItemForm
+from order.models import Order, OrderItem
 from account.models import User
-from cart.models import Cart
-from address.models import Address
-from django.forms.models import model_to_dict
-from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
-from django.views.generic import FormView, DetailView, CreateView, View, UpdateView, DeleteView
+from django.views.generic import DetailView, CreateView, View, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+class OrderAllView(LoginRequiredMixin, DetailView):
+    login_url = settings.LOGIN_URL
+    model			= Order
+    form_class      = OrderForm
+    template_name	= 'order/order_details.html'
+    success_url		= reverse_lazy('order:details')
+
+class OrderItemAllView(LoginRequiredMixin, View):
+    def get(self,request, context={}):
+        if request.user and (not request.user.is_anonymous) and (request.user.email) and (request.user.is_authenticated):
+            context={"orders":None}
+            context = {"message": "{} has reached the Order page.".format(request.user)}
+            order_item_obj=OrderItem.objects.filter(user=User.objects.get(email=request.user.email)).all()
+            if order_item_obj:
+                context["orders"]=order_item_obj
+        return render(request, "order/order_details.html", context)
+
+
+class OrderItemCreateView(LoginRequiredMixin, CreateView):
+    login_url       = settings.LOGIN_URL
+    model			= OrderItem
+    form_class      = OrderItemForm
+    template_name	= 'order/create_order.html'
+    success_url		= reverse_lazy('order:details')
+
+class OrderItemUpdateView(LoginRequiredMixin, UpdateView):
+    login_url       = settings.LOGIN_URL
+    model			= OrderItem
+    form_class      = OrderItemForm
+    template_name	= 'order/order_item_update_form.html'
+    success_url		= reverse_lazy('order:details')
+
+
+class OrderItemDeleteView(LoginRequiredMixin, DeleteView):
+    login_url       = settings.LOGIN_URL
+    model			= OrderItem
+    form_class      = OrderItemForm
+    template_name	= 'order/order_item_confirm_delete.html'
+    success_url		= reverse_lazy('order:details')
+
 @login_required(login_url=settings.LOGIN_URL)
-def order_view(request):
-    user=request.user
-    context = {"message": "{} has reached the order_view page.".format(user)}
-    form=None
-    if user and not user.is_anonymous:
-        user_email=user.email
-        try:
-            if user_email:
-                user_obj=User.objects.get(email=user_email)
-                cart_obj=Cart.objects.filter(user=user_obj)
-                if cart_obj and user_obj:
-                    cart_obj=cart_obj.latest('updated_timestamp')
-                    order_obj=Order.objects.filter(user=user_obj,cart=cart_obj)
-                    if order_obj:
-                        order_obj=order_obj.latest('updated_timestamp')
-                        form=OrderForm()
-                        form.fields["user"].initial = User.objects.get(email=user_email)
-                        form.fields["cart"].queryset = Cart.objects.filter(user=user_obj)
-                        form.fields["delivery_address"].initial = order_obj.delivery_address
-                        form.fields["shipping_cost"].initial = order_obj.shipping_cost
-                        form.fields["total"].initial = order_obj.total
-
-        except Exception as exc:
-            print(exc)
-    context["form"]=form
-    return render(request, "order/order_details.html", context)
-
-@login_required(login_url=settings.LOGIN_URL)
-def create_order(request):
-    user=request.user
-    context = {"message": "{} has reached the create_order page.".format(user)}
-    form=None
-    if user and not user.is_anonymous:
-        user_email=user.email
-        try:
-            if user_email:
-                if request.method == "POST":
-                    form = OrderForm(request.POST)
-                    if form.is_valid():
-                        form.save()
-                        return redirect("/order")
-                    else:
-                        print(form.errors)
-                else:
-                    user_obj=User.objects.get(email=user_email)
-                    cart_obj=Cart.objects.filter(user=user_obj)
-                    address_obj = Address.objects.filter(user=user_obj)
-                    if cart_obj and user_obj:
-                        form=OrderForm()
-                        cart_obj=cart_obj.latest('updated_timestamp')
-                        form.fields["user"].queryset = User.objects.filter(email=user_email)
-                        form.fields["cart"].queryset = Cart.objects.filter(user=user_obj)
-                        form.fields["shipping_cost"].initial = 29
-                        form.fields["total"].initial = cart_obj.cart_total+29
-        except Exception as exc:
-            print(exc)
-        context["form"]=form
-    return render(request, "order/create_order.html", context)
-
+def submit_form(request, context={}):
+    if request.user and (not request.user.is_anonymous) and (request.user.email) and (request.user.is_authenticated):
+        context={"form":None}
+        context = {"message": "{} has reached the Order page.".format(request.user)}
+        if request.method=="GET":
+            form = OrderForm()
+            user_obj=User.objects.get(email=request.user.email)
+            form.fields["items"].queryset = OrderItem.objects.filter(user=user_obj).all() # 3 values so errors out
+            context["form"]=form
+        elif request.method=="POST":
+            form = OrderForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect("/order")
+            else:
+                print(form.errors)
+    return render(request, "order/submit_order.html", context)

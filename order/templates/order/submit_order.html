@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Order</h1>
     <h1>{{ message }}</h1>
-    <form action='{% url "order:order_view" %}' method="post">
+    <form action='{% url "order:submit" %}' method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="Submit">

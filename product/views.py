@@ -23,9 +23,9 @@ class ProductAllView(LoginRequiredMixin, View):
         if request.user and (not request.user.is_anonymous) and (request.user.email) and (request.user.is_authenticated):
             context={"product":None}
             context = {"message": "{} has reached the Product page.".format(request.user)}
-            product_obj=Product.objects.filter(user=User.objects.get(email=request.user.email))
+            product_obj=Product.objects.all()#filter(user=User.objects.get(email=request.user.email))
             if product_obj:
-                product_obj=product_obj.all()
+                #product_obj=product_obj.all()
                 context["products"]=product_obj
         return render(request, "product/product_details.html", context)
 

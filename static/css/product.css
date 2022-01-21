@@ -19,7 +19,8 @@
 }
 
 .cls-product-container .cls-product .cls-product-items img{
-    width: 100%;
+    width: 200px;
+    height: 127px;
 }
 .cls-product-container .cls-product .cls-product-items input{
 /* display: block; */

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <h3>Delete Order Item</h3>
+    <p>{{ message }}</p>
+    <form action="" method="post">{% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <input type="submit" value="Confirm" />
+        <input type="submit" value="Cancel" />
+    </form>
+
+{% endblock %}

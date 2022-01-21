@@ -2,13 +2,26 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h1>Order</h1>
-    <h1>{{ message }}</h1>
-    <form action='{% url "order:order_view" %}' method="GET">
-        {% csrf_token %}
-        {% if form %}
-            {{ form|crispy }}
-        {% endif %}
+    <h3>Order</h3>
+    <p>{{ message }}</p>
+    <a href="{% url 'order:create' %}">Add Order Item</a>
+    {% if orders %}
+    <a href="{% url 'order:submit' %}">Submit Order</a>
+    <ul class="cls-product">
+        {% for item in orders %}
+        <li class="cls-product-items">
+            <p>{{ item.id }}</p>
+            <p>{{ item.product }}</p>
+            <p>{{ item.services }}</p>
+            <p>{{ item.quantity }}</p>
+            <section>
+                <a href="{% url 'order:update' item.id %}">Update Order Item</a>
+                <a href="{% url 'order:delete' item.id %}">Delete Order Item</a>
+            </section>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
          
     </form>
 

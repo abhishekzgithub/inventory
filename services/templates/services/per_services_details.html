@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% include "js.html" %}
+
+{% block content %}
+<section class="cls-product-container">
+    <h3>Services</h3>
+    <p>{{ message }}</p>
+    <ul class="cls-product">
+        {% for item in services %}
+        <li class="cls-product-items">
+            <a href="{% url 'product:update' item.id %}">Update</a>
+            <a href="{% url 'product:delete' item.id %}">Delete</a>
+            <p>{{ item.title }}</p>
+            <p>{{ item.price }}</p>
+            <a href="">
+                <img src="{% get_media_prefix %}{{item.image}}"/>
+            </a>
+            <section>
+                {% include "cart/add_to_cart.html" with product_id=item.id %}
+                {% include "cart/remove_from_cart.html" with product_id=item.id %}
+            </section>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% endblock %}

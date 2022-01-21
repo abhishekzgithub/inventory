@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block content %}
-    <h1>Cart
+    <h3>Cart
         <a
-            href=' {% url "order:create_order" %} '>Create order
+            href=' {% url "order:create" %} '>Create order
         </a>
-    </h1>
-    <h1>{{ message }}</h1>
+    </h3>
+    <p>{{ message }}</p>
     {% if cart %}
     <table class="container">
         <thead>
@@ -15,7 +15,7 @@
                 <th>#</th>
                 <th>Item</th>
                 <th>Price</th>
-                <th>Subtotal</th>
+                <th>Quantity</th>
                 <th>Total</th>
             </tr>
         </thead>
