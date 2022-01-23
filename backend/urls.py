@@ -25,10 +25,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'),name="home"),
     path('admin/', admin.site.urls),
     url("^account/",include(("account.urls","account"), namespace="account")),
-    #url("^address/",include(("address.urls","address"), namespace="address")),
-    #path('example/', TemplateView.as_view(template_name='example.html')),
     url("^product/",include(("product.urls","product"), namespace="product")),
-    #url("^cart/",include(("cart.urls","cart"), namespace="cart")),
     url("^order/",include(("order.urls","order"), namespace="order"))
 ]
 

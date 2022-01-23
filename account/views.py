@@ -5,7 +5,6 @@ from django.views.generic import FormView, DetailView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from account.models import User
-from address.models import Address
 from django.conf import settings
 
 def login_page(request):
@@ -65,16 +64,7 @@ def password_change(request):
             form.save()
             update_session_auth_hash(request, form.user)
 
-@login_required(login_url=settings.LOGIN_URL)
-def user_profile(request):
-    user_obj=User.objects.get(email=request.user.email)
-    context = {"message": "{} has reached the profile page.".format(request.user)}
-    context["user"]=user_obj
-    address_obj=Address.objects.filter(user=user_obj)
-    if address_obj:
-        address_obj=address_obj.all()
-        context["addresses"]=address_obj
-    return render(request, "user_profile.html", context)
+
 
 def home(request):
     context = {"message": "You have been reached the home page."}
