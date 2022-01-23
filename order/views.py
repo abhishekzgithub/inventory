@@ -25,13 +25,12 @@ class OrderView(LoginRequiredMixin, View):
     def get(self,request, context={}):
         try:
             if request.user and (not request.user.is_anonymous) and (request.user.email) and (request.user.is_authenticated):
-                context={"orders":None}
-                context = {"message": "{} has reached the Order page.".format(request.user)}
+                context["orders"]=None
+                context["message"] = "{} has reached the Order page.".format(request.user)
                 order_item_obj=Order.objects.get(user=User.objects.get(email=request.user.email),
                                                     ordered=False)
                 if order_item_obj:
                     context["orders"]=order_item_obj
-                #return render(request, "order/order_details.html", context)
         except ObjectDoesNotExist:
                 print("No Order created yet.")
         return render(request, "order/order_details.html", context)

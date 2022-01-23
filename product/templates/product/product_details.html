@@ -5,9 +5,7 @@
 {% block content %}
 <section class="cls-product-container">
     <h3>All Products</h3>
-    
     <p>{{ message }}</p>
-    
     <a href="{% url 'product:create' %}">Create Product</a>
     {% if products %}
     <ul class="cls-product">
@@ -23,7 +21,6 @@
                     {% include "order/cart/add_to_cart.html" with product_id=product.id %}
                 </section>
             </a>
-
         </li>
         {% endfor %}
     </ul>

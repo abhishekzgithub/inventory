@@ -4,34 +4,58 @@
 {% block content %}
     <h3>Order</h3>
     <p>{{ message }}</p>
-    {% if orders.items.all %}
-    <ul class="cls-product">
-        {% for order_item in orders.items.all %}
-            <ul>
-                <br/>
-                <li><p> Id: {{ order_item.id }}</p></li>
-                <li><p> Product Name: {{ order_item.product.title }}</p></li>
-                <li><p> Product category1: {{ order_item.product.category1 }}</p></li>
-                <li><p> Product category2: {{ order_item.product.category2 }}</p></li>
-                <li><p> Product price:  {{ order_item.product.price }}</p></li>
-                <li><p> Product quantity:  {{ order_item.quantity }}</p></li>
-                <a href="{% url 'order:update_cart_item' order_item.id %}">
-                    Edit Cart
-                </a>
-                <a href="{% url 'order:delete_from_cart' order_item.id %}">
-                    Delete from Cart
-                </a>
-            </ul>
-            <br/>
-            <ul>
-                <li><p> Delivery Address: {{ orders.delivery_address }}</p></li>
-                <li><p> Total Amount: {{ orders.get_total }}</p></li>
-            </ul>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    {% if not orders.items.all %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Item title</th>
+                <th scope="col">Item Category1</th>
+                <th scope="col">Item Category2</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total Item Price</th>
+                <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order_item in orders.items.all %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td style="text-align: center;">{{ order_item.product.title }}</td>
+                <td style="text-align: center;">{{ order_item.product.category1 }}</td>
+                <td style="text-align: center;">{{ order_item.product.category2 }}</td>
+                <td style="text-align: center;">{{ order_item.product.price }}</td>
+                <td style="text-align: center;">
+                    {{ order_item.quantity }}
+                </td>
+                <td style="text-align: center;">
+                    INR: {{ order_item.get_total_item_price }}
+                </td>
+                <td style="text-align: center;">
+                    <a href="{% url 'order:update_cart_item' order_item.id %}"><i class="fa-s bi bi-pencil-square"></i>Edit</a>
+                    <a style='color: red;' href="{% url 'order:delete_from_cart' order_item.id %}">
+                        <i class="fas fa-trash float-right"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+            {% if orders.get_total %}
+            <tr>
+                <td colspan="6"><b>Order Total</b></td>
+                <td style="text-align: center;"><b>INR: {{ orders.get_total }}</b></td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                <a class='btn btn-warning float-right ml-2' href='{% url "order:details" %}'>Proceed to checkout</a>
+                <a class='btn btn-primary float-right' href='{% url "product:details" %}'>Continue shopping</a>
+                </td>
+            </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    {% if not orders or not orders.items.all %}
         <p>No products added yet.</p>
+        <a class='btn btn-primary float-right' href='{% url "product:details" %}'>Continue shopping</a>
     {% endif %}
     </form>
 
