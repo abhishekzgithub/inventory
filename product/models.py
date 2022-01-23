@@ -5,6 +5,22 @@ import os
 from django.db.models import Q
 from account.models import User
 
+CATEGORY1_CHOICES = (
+    ('men', 'Men'),
+    ('houselinen', 'House-Linen'),
+    ('ladies', 'Ladies'),
+    ('polishing','Polishing'),
+    ('homecleaningservices','Home-Cleaning-Services'),
+
+)
+
+CATEGORY2_CHOICES = (
+    ('washsteampress', 'Wash-Steam-Press'),
+    ('dryclean', 'Dry-Clean'),
+    ('steampress', 'Steam-Press'),
+    ('misc','Misc'),
+)
+
 def get_filename_ext(filepath):
     base_name = os.path.basename(filepath)
     name, ext = os.path.splitext(base_name)
@@ -55,27 +71,24 @@ class ProductManager(models.Manager):
         return self.get_queryset().active().search(query)
 
 class Product(models.Model):
-    #user            = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     title           = models.CharField(max_length=120)
-    #slug            = models.SlugField(blank=True, unique=True)
     description     = models.CharField(max_length=120, null=True, blank=True)
     image           = models.FileField(upload_to=upload_image_path, null=True, blank=True)
     featured        = models.BooleanField(default=False)
     active          = models.BooleanField(default=True)
-    #quantity        = models.PositiveIntegerField(blank=True, null=True)
-    #coupon          = models.CharField(max_length=120, null=True, blank=True)
-    #discount        = models.DecimalField(null=True, blank=True, max_digits=100, decimal_places=2)
+    category1       = models.CharField(max_length=120, default=CATEGORY1_CHOICES[0][0], choices=CATEGORY1_CHOICES)
+    category2       = models.CharField(max_length=120, default=CATEGORY2_CHOICES[0][0], choices=CATEGORY2_CHOICES)
     price           = models.DecimalField(decimal_places=2, max_digits=20, null=True, blank=True)
     created_timestamp = models.DateTimeField(auto_now=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
     
     objects = ProductManager()
 
-    # def get_absolute_url(self):
-    #     return reverse("products:details", kwargs={"slug": self.slug})
+    def get_absolute_url(self):
+        return reverse("product:details")
 
     def __str__(self):
-        return self.title
+        return str(self.id)+"-"+self.title
 
     def __unicode__(self):
         return self.title

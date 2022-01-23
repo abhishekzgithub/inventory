@@ -4,25 +4,28 @@
 {% block content %}
     <h3>Order</h3>
     <p>{{ message }}</p>
-    <a href="{% url 'order:create' %}">Add Order Item</a>
     {% if orders %}
-    <a href="{% url 'order:submit' %}">Submit Order</a>
     <ul class="cls-product">
-        {% for item in orders %}
-        <li class="cls-product-items">
-            <p>{{ item.id }}</p>
-            <p>{{ item.product }}</p>
-            <p>{{ item.services }}</p>
-            <p>{{ item.quantity }}</p>
-            <section>
-                <a href="{% url 'order:update' item.id %}">Update Order Item</a>
-                <a href="{% url 'order:delete' item.id %}">Delete Order Item</a>
-            </section>
-        </li>
+        {% for order_item in orders.items.all %}
+            <ul>
+                <br/>
+            <li><p> Product Name: {{ order_item.product.title }}</p></li>
+            <li><p> Product category1: {{ order_item.product.category1 }}</p></li>
+            <li><p> Product category2: {{ order_item.product.category2 }}</p></li>
+            <li><p> Product price:  {{ order_item.product.price }}</p></li>
+            <li><p> Product quantity:  {{ order_item.quantity }}</p></li>
+            </ul>
         {% endfor %}
+        <br/>
+        <ul>
+            <li><p> Delivery Address: {{ orders.delivery_address }}</p></li>
+            <li><p> Total Amount: {{ orders.get_total }}</p></li>
+        </ul>
     </ul>
     {% endif %}
-         
+    {% if not orders %}
+        <p>No products added yet.</p>
+    {% endif %}
     </form>
 
 {% endblock %}

@@ -4,7 +4,7 @@
 
 {% block content %}
 <section class="cls-product-container">
-    <h3>Products</h3>
+    <h3>All Products</h3>
     
     <p>{{ message }}</p>
     
@@ -13,15 +13,18 @@
     <ul class="cls-product">
         {% for product in products %}
         <li class="cls-product-items">
-            <a href="{{ product.id }}">
-                <img src="{% get_media_prefix %}{{product.image}}"/>
+            <a href="{% url 'product:per_category_product_detail' product.category1 product.category2 product.id %}">
+                <a href="{% url 'product:per_category_product_detail' product.category1 product.category2 product.id %}">
+                    <img src="{% get_media_prefix %}{{product.image}}"/>
+                </a>
+                <p>{{ product.title }}</p>
+                <p>{{ product.price }}</p>
+                <section>
+                    {% include "order/cart/add_to_cart.html" with product_id=product.id %}
+                    {% include "order/cart/remove_from_cart.html" with product_id=product.id %}
+                </section>
             </a>
-            <p>{{ product.title }}</p>
-            <p>{{ product.price }}</p>
-            <section>
-                {% include "cart/add_to_cart.html" with product_id=product.id %}
-                <!-- {% include "cart/remove_from_cart.html" with product_id=product.id %} -->
-            </section>
+
         </li>
         {% endfor %}
     </ul>

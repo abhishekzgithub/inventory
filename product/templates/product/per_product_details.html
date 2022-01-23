@@ -11,15 +11,15 @@
         <li class="cls-product-items">
             <a href="{% url 'product:update' product.id %}">Update Product</a>
             <a href="{% url 'product:delete' product.id %}">Delete Product</a>
-            <p>{{ product.title }}</p>
-            <p>{{ product.price }}</p>
+            {% if product.image %}
             <a href="">
                 <img src="{% get_media_prefix %}{{product.image}}"/>
             </a>
-            <section>
-                {% include "cart/add_to_cart.html" with product_id=product.id %}
-                {% include "cart/remove_from_cart.html" with product_id=product.id %}
-            </section>
+            {% endif %}
+            <p>{{ product.category1 }}</p>
+            <p>{{ product.category2 }}</p>
+            <p>{{ product.title }}</p>
+            <p>{{ product.price }}</p>
         </li>
         {% endfor %}
     </ul>
