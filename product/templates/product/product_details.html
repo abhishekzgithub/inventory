@@ -21,7 +21,6 @@
                 <p>{{ product.price }}</p>
                 <section>
                     {% include "order/cart/add_to_cart.html" with product_id=product.id %}
-                    {% include "order/cart/remove_from_cart.html" with product_id=product.id %}
                 </section>
             </a>
 

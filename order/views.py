@@ -82,7 +82,7 @@ class OrderSubmitView(LoginRequiredMixin, View):
 class OrderItemUpdateView(LoginRequiredMixin, UpdateView):
     login_url       = settings.LOGIN_URL
     model			= OrderItem
-    fields          = '__all__'
+    fields          = ["quantity"]
     template_name	= 'order/order_item/order_item_update_form.html'
     success_url		= reverse_lazy('order:details')
 
