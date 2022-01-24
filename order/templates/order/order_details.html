@@ -41,6 +41,15 @@
                 </td>
             </tr>
             {% endfor %}
+            <tr>
+                <td colspan="6"><b>Order Discount {{ orders.discount }}%</b></td>
+                <td style="text-align: center;">
+                    {% include "order/discount.html" with order_id=orders.id %}
+                </td>
+                <td style="text-align: center;">
+                    {% include "order/reset_discount.html" with order_id=orders.id %}
+                </td>
+            </tr>
             {% if orders.get_total %}
             <tr>
                 <td colspan="6"><b>Order Total</b></td>

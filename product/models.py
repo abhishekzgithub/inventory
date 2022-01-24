@@ -78,7 +78,7 @@ class Product(models.Model):
     active          = models.BooleanField(default=True)
     category1       = models.CharField(max_length=120, default=CATEGORY1_CHOICES[0][0], choices=CATEGORY1_CHOICES)
     category2       = models.CharField(max_length=120, default=CATEGORY2_CHOICES[0][0], choices=CATEGORY2_CHOICES)
-    price           = models.DecimalField(decimal_places=2, max_digits=20, null=True, blank=True)
+    price           = models.FloatField(blank=False, null=False)
     created_timestamp = models.DateTimeField(auto_now=True)
     updated_timestamp = models.DateTimeField(auto_now=True)
     

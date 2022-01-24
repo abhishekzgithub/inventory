@@ -115,3 +115,20 @@ class OrderItemDeleteView(LoginRequiredMixin, DeleteView):
     fields          = '__all__'
     template_name	= 'order/order_item/order_item_confirm_delete.html'
     success_url		= reverse_lazy('order:details')
+
+
+@login_required(login_url=settings.LOGIN_URL)
+def apply_discount_to_order(request, pk):
+    if request.POST:
+        if request.POST.get("reset_discount_percent",None):
+            discount_percent=float(request.POST["reset_discount_percent"])
+        elif request.POST.get("discount_percent", None):
+            discount_percent=float(request.POST["discount_percent"])
+        if discount_percent<0 or discount_percent>100:
+            return redirect("order:details") 
+        order=Order.objects.get(id=pk)
+        if order.discount>0.00:
+            discount_percent=(discount_percent+float(order.discount))-order.discount
+        order.discount=discount_percent
+        order.save()
+    return redirect("order:details")

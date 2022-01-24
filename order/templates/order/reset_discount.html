@@ -1,0 +1,14 @@
+<form class='form-product-ajax' 
+        method='POST' 
+        action='{% url "order:apply_discount" order_id %}' 
+        data-endpoint='{% url "order:apply_discount" order_id %}' 
+        class="form"> {% csrf_token %}
+    <input  class='cart-item-product-id' 
+            type='hidden' 
+            name='reset_discount_percent'
+            value="0.00" />
+    <button type='submit'
+            class='btn btn-link btn-sm'
+            style="padding:0px;cursor: pointer;">
+    Reset Discount</button>
+</form>
