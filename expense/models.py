@@ -9,3 +9,6 @@ class Expense(models.Model):
     notes = models.TextField()
     created_timestamp   = models.DateTimeField(auto_now=True)
     updated_timestamp   = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "Id:{0}, Amount:{1}".format(str(self.id),str(self.amount))
