@@ -20,9 +20,11 @@ from django.views.generic import TemplateView
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 from django.conf import settings
+from django.views.i18n import JavaScriptCatalog
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html'),name="home"),
+    path('jsi18n', JavaScriptCatalog.as_view(), name='js-catlog'),
     path('admin/', admin.site.urls),
     url("^account/",include(("account.urls","account"), namespace="account")),
     url("^product/",include(("product.urls","product"), namespace="product")),

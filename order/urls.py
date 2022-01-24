@@ -2,6 +2,7 @@ from django.conf.urls import url, include
 import order.views as order_views
 
 urlpatterns = [
+    
     url("^$", order_views.OrderView.as_view(), name="details"),
     url(r"^add/(?P<pk>[\d]+)/$", order_views.OrderView.as_view(), name="add_to_cart"),
     url(r'^update/(?P<pk>[\d]+)/$', order_views.OrderItemUpdateView.as_view(), name="update_cart_item"),

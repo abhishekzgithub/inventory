@@ -3,10 +3,12 @@
     padding: 0;
     border: 1px;
     box-sizing: border-box;
-    border: 1px solid palegreen;
+    border: 1px ;
+    color: #000000!important;
+    background-color: rgb(250, 249, 244)!important;
 }
 body{
-    background-color: gold;
+    background-color: rgb(250, 249, 244);
     box-sizing: border-box;
     /* border: 1px solid red; */
     width: 69%;

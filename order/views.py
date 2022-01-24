@@ -43,7 +43,7 @@ class OrderView(LoginRequiredMixin, View):
             ordered=False
         )
         order_qs = Order.objects.filter(user=request.user
-                                        #, ordered=False
+                                        , ordered=False
                                         )
         if order_qs.exists():
             order = order_qs[0]
@@ -68,15 +68,39 @@ class OrderView(LoginRequiredMixin, View):
             #messages.info(request, "This item was added to your cart.")
             return redirect("order:details")
 
-class OrderSubmitView(LoginRequiredMixin, View):
-    # login_url       = settings.LOGIN_URL
-    # model			= Order
-    # form_class      = OrderForm
-    # template_name	= 'order/submit_order.html'
-    # success_url		= reverse_lazy('order:details')
+class OrderSubmitView(LoginRequiredMixin, CreateView):
+    login_url       = settings.LOGIN_URL
+    model			= Order
+    form_class      = OrderForm
+    template_name	= 'order/submit_order.html'
+    success_url		= reverse_lazy('order:details')
 
     def post(self,request,pk, context={}):
-        return render(request, "order/order_details.html", context)
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            delivery_address=form.cleaned_data.get("delivery_address")
+            payment_method=form.cleaned_data.get("payment_method")
+            status = form.cleaned_data.get("status")
+            notes = form.cleaned_data.get("notes")
+            ordered_date=form.cleaned_data.get("ordered_date")
+            delivery_date=form.cleaned_data.get("delivery_date")
+            order_obj = Order.objects.get(id=pk)
+            order_obj.delivery_address=delivery_address
+            order_obj.ordered=True
+            order_obj.status=status
+            order_obj.payment_method=payment_method
+            #order_obj.delivery_charge=delivery_charge
+            #order_obj.discount=discount
+            order_obj.total=order_obj.get_total()
+            order_obj.notes=notes
+            order_obj.ordered_date=ordered_date
+            order_obj.delivery_date=delivery_date
+            order_obj.save()
+            order_item = OrderItem.objects.filter(ordered=False).update(ordered=True)
+        else:
+            print(form.errors)
+            print(form.error_messages)
+        return redirect("product:details")
 
 class OrderItemUpdateView(LoginRequiredMixin, UpdateView):
     login_url       = settings.LOGIN_URL

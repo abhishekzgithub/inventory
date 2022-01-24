@@ -32,7 +32,9 @@
                     INR: {{ order_item.get_total_item_price }}
                 </td>
                 <td style="text-align: center;">
-                    <a href="{% url 'order:update_cart_item' order_item.id %}"><i class="fa-s bi bi-pencil-square"></i>Edit</a>
+                    <a href="{% url 'order:update_cart_item' order_item.id %}">
+                        <i class="fas fa-edit"></i>
+                    </a>
                     <a style='color: red;' href="{% url 'order:delete_from_cart' order_item.id %}">
                         <i class="fas fa-trash float-right"></i>
                     </a>
@@ -46,7 +48,7 @@
             </tr>
             <tr>
                 <td colspan="5">
-                <a class='btn btn-warning float-right ml-2' href='{% url "order:details" %}'>Proceed to checkout</a>
+                <a class='btn btn-warning float-right ml-2' href='{% url "order:submit_order" orders.id %}'>Proceed to checkout</a>
                 <a class='btn btn-primary float-right' href='{% url "product:details" %}'>Continue shopping</a>
                 </td>
             </tr>

@@ -41,15 +41,15 @@ class Order(models.Model):
     user                = models.ForeignKey(User, on_delete=models.CASCADE)
     items               = models.ManyToManyField(OrderItem) # this will be many to many
     delivery_address    = models.CharField(max_length=120, null=True, blank=True)
-    ordered              = models.BooleanField(default=False)
+    ordered             = models.BooleanField(default=False)
     status              = models.CharField(max_length=120, default='created', choices=ORDER_STATUS_CHOICES)
     payment_method      = models.CharField(max_length=120,choices=ORDER_PAYMENT_METHOD_CHOICES, default=ORDER_PAYMENT_METHOD_CHOICES[0][0])
     delivery_charge     = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     notes               = models.TextField(blank = True)
     discount            = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     total               = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
-    ordered_date        = models.DateTimeField()
-    delivery_date       = models.DateTimeField(null=True, blank=True)
+    ordered_date        = models.DateField()
+    delivery_date       = models.DateField(null=True, blank=True)
     created_timestamp   = models.DateTimeField(auto_now=True)
     updated_timestamp   = models.DateTimeField(auto_now=True)
 
@@ -60,6 +60,10 @@ class Order(models.Model):
         total = 0
         for order_item in self.items.all():
             total += order_item.get_final_price()
+        if self.delivery_charge:
+            total+=self.delivery_charge
+        if self.discount:
+            total-=self.discount
         return total
     
     class Meta:
