@@ -28,7 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url("^account/",include(("account.urls","account"), namespace="account")),
     url("^product/",include(("product.urls","product"), namespace="product")),
-    url("^order/",include(("order.urls","order"), namespace="order"))
+    url("^order/",include(("order.urls","order"), namespace="order")),
+    url("^analytics/",include(("analytics.urls","analytics"), namespace="analytics")),
 ]
 
 #urlpatterns += staticfiles_urlpatterns()

@@ -132,3 +132,5 @@ def apply_discount_to_order(request, pk):
         order.discount=discount_percent
         order.save()
     return redirect("order:details")
+
+

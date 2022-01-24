@@ -41,6 +41,7 @@
                 </td>
             </tr>
             {% endfor %}
+            {% if orders.items.all %}
             <tr>
                 <td colspan="6"><b>Order Discount {{ orders.discount }}%</b></td>
                 <td style="text-align: center;">
@@ -50,15 +51,18 @@
                     {% include "order/reset_discount.html" with order_id=orders.id %}
                 </td>
             </tr>
+            {% endif %}
             {% if orders.get_total %}
             <tr>
                 <td colspan="6"><b>Order Total</b></td>
                 <td style="text-align: center;"><b>INR: {{ orders.get_total }}</b></td>
             </tr>
             <tr>
-                <td colspan="5">
-                <a class='btn btn-warning float-right ml-2' href='{% url "order:submit_order" orders.id %}'>Proceed to checkout</a>
-                <a class='btn btn-primary float-right' href='{% url "product:details" %}'>Continue shopping</a>
+                <td>
+                    <a class='btn btn-primary float-right' href='{% url "product:details" %}'>Continue shopping</a>
+                </td>
+                <td>
+                    <a class='btn btn-warning float-right ml-2' href='{% url "order:submit_order" orders.id %}'>Proceed to checkout</a>
                 </td>
             </tr>
             {% endif %}

@@ -48,7 +48,7 @@ class Order(models.Model):
     payment_method      = models.CharField(max_length=120,choices=ORDER_PAYMENT_METHOD_CHOICES, default=ORDER_PAYMENT_METHOD_CHOICES[0][0])
     #delivery_charge     = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     notes               = models.TextField(blank = True)
-    discount            = models.FloatField(blank=True, null=True)
+    discount            = models.FloatField(blank=True, null=True, default=0.00)
     total               = models.FloatField(blank=True, null=True)
     ordered_date        = models.DateField()
     delivery_date       = models.DateField(null=True, blank=True)
@@ -62,7 +62,7 @@ class Order(models.Model):
         total = 0
         for order_item in self.items.all():
             total += order_item.get_final_price()
-        if self.discount>0:
+        if self.discount and self.discount>0:
             total=total-(total*self.discount/100)
         return total
     
