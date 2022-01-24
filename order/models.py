@@ -1,9 +1,10 @@
 from random import choice
 from django.db import models
-from django.conf import settings
 from product.models import Product
+from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
+
 ORDER_STATUS_CHOICES = (
     ('created', 'Order Made'),
     ('inprocess', 'In-process'),

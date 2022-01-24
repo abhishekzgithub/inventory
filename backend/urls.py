@@ -30,6 +30,7 @@ urlpatterns = [
     url("^product/",include(("product.urls","product"), namespace="product")),
     url("^order/",include(("order.urls","order"), namespace="order")),
     url("^analytics/",include(("analytics.urls","analytics"), namespace="analytics")),
+    url("^expense/",include(("expense.urls","expense"), namespace="expense")),
 ]
 
 #urlpatterns += staticfiles_urlpatterns()
