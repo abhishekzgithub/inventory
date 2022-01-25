@@ -135,3 +135,7 @@ order/migrations/0002_alter_order_id.py
 .gitignore
 .vscode/launch.json
 .vscode/settings.json
+.expo-shared
+react-inventory/ios/reactinventory.xcodeproj/project.pbxproj
+react-inventory/ios/reactinventory/Supporting/Expo.plist
+react-inventory/ios/reactinventory.xcodeproj/xcshareddata/xcschemes/reactinventory.xcscheme
