@@ -10,6 +10,7 @@ django = "*"
 djangorestframework = "*"
 pillow = "*"
 django-crispy-forms = "*"
+reportlab = "*"
 
 [requires]
 python_version = "3.8"

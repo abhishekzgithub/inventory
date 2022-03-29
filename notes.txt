@@ -89,3 +89,5 @@ https://materialdesignicons.com/
      $ npm uninstall -g a_module
 
 sudo chown -R $(whoami) /usr/local/bin
+
+https://medium.com/djangotube/django-roles-groups-and-permissions-introduction-a54d1070544

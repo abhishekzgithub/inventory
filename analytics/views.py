@@ -4,6 +4,7 @@ from product.models import Product
 from expense.models import Expense
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from analytics import reports
 
 @login_required(login_url=settings.LOGIN_URL)
 def display_piechart(request, context={}):
@@ -79,3 +80,7 @@ def display_all_expense(request):
 def display_total_expense(request):
     total_expense = Expense.objects.filter(user=request.user).count()
     return total_expense
+
+@login_required(login_url=settings.LOGIN_URL)
+def generate_pdf(request):
+    return reports.some_view(request)
