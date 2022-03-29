@@ -11,6 +11,8 @@ djangorestframework = "*"
 pillow = "*"
 django-crispy-forms = "*"
 reportlab = "*"
+django-tenant-users = "*"
+django-tenants = "*"
 
 [requires]
 python_version = "3.8"

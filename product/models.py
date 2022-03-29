@@ -3,7 +3,8 @@ from django.urls import reverse
 import random
 import os
 from django.db.models import Q
-from account.models import User
+from django.conf import settings
+User = settings.AUTH_USER_MODEL
 
 CATEGORY1_CHOICES = (
     ('men', 'Men'),
@@ -71,6 +72,7 @@ class ProductManager(models.Manager):
         return self.get_queryset().active().search(query)
 
 class Product(models.Model):
+    user            = models.ForeignKey(User,on_delete=models.CASCADE)
     title           = models.CharField(max_length=120)
     description     = models.CharField(max_length=120, null=True, blank=True)
     image           = models.FileField(upload_to=upload_image_path, null=True, blank=True)
